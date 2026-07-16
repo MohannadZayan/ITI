@@ -50,9 +50,8 @@ void RemoveDuplicates ( vector<int> &vec) {
 }
 
 int main () {
-    vector<int> vec1 = {1, 5, 3, 5, 8, 2, 8};
-vector<int> vec2 = {10, 4, 7, 4, 2, 10, 9};
-vector<int> vec3 = {6, 3, 9, 1, 6, 8, 3};
+ vector<int> vec1 = {1, 5, 3, 5, 8, 2, 8};
+
 
 //=========== VECTOR 1 ==========
 cout << "Vector 1: " << endl;
