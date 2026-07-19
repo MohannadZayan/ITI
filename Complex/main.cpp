@@ -72,6 +72,22 @@ class Complex {
         return result;
     }
 
+    //OPERATOR OVERLOADING
+
+    Complex operator + (const Complex & other) {
+        Complex temp;
+        temp.real = real+other.real;
+        temp.img = img+other.img;
+        return temp;
+    }
+
+    Complex operator - (const Complex & other) {
+        Complex temp;
+        temp.real = real+other.real;
+        temp.img = img+other.img;
+        return temp;
+    }
+
 };
 
 int main() {
@@ -91,9 +107,8 @@ int main() {
     c3.PrintComplex();
     cout << endl;
 
-    Complex sum = c2.Add(c3);
+    Complex sum = c2+c3;
 
     cout << "C2 + C3 = ";
     sum.PrintComplex();
-    cout << endl;
 }
