@@ -73,61 +73,163 @@ class Student {
     } 
 };
 
-int main () {
-    vector <Student> students;
+int main()
+{
+    vector<Student> students;
     int choice;
-    do {
-        cout << "\n==========STUDENT MANAGEMENT SYSTEM ==========\n";
+
+    do
+    {
+        cout << "\n========== STUDENT MANAGEMENT SYSTEM ==========\n";
         cout << "1. Add Student\n";
-        cout << "2. View All students\n";
-        cout << "3. Search for a student\n";
+        cout << "2. View All Students\n";
+        cout << "3. Search for a Student\n";
         cout << "4. Exit\n";
+        cout << "Enter your choice: ";
 
-        cin >> choice;
+        while (!(cin >> choice))
+        {
+            cout << "Invalid input. Please enter a number: ";
+            cin.clear();
+            cin.ignore(1000, '\n');
+        }
 
-        if (choice == 1) {
+        if (choice == 1)
+        {
             int id;
             string name;
             int age;
             string major;
             double gpa;
 
+            // Student ID
             cout << "\nEnter Student ID: ";
-            cin >> id;
 
+            while (!(cin >> id))
+            {
+                cout << "Invalid ID. Please enter a number: ";
+                cin.clear();
+                cin.ignore(1000, '\n');
+            }
+
+            cin.ignore(1000, '\n');
+
+            // Student Name
             cout << "Enter Student Name: ";
             getline(cin, name);
 
+            while (name.empty())
+            {
+                cout << "Name cannot be empty. Enter Student Name: ";
+                getline(cin, name);
+            }
+
+            // Student Age
             cout << "Enter Student Age: ";
-            cin >> age;
 
+            while (!(cin >> age) || age <= 0)
+            {
+                cout << "Invalid age. Please enter a valid number: ";
+                cin.clear();
+                cin.ignore(1000, '\n');
+            }
 
+            cin.ignore(1000, '\n');
+
+            // Student Major
             cout << "Enter Student Major: ";
             getline(cin, major);
 
-            cout << "Enter Student GPA: ";
-            cin >> gpa;
+            while (major.empty())
+            {
+                cout << "Major cannot be empty. Enter Student Major: ";
+                getline(cin, major);
+            }
 
-            Student newStudent (id,name,age,major,gpa);
+            // Student GPA
+            cout << "Enter Student GPA (0.0 - 4.0): ";
 
-            students.push_back (newStudent);
+            while (!(cin >> gpa) || gpa < 0.0 || gpa > 4.0)
+            {
+                cout << "Invalid GPA. Please enter a GPA between 0.0 and 4.0: ";
+                cin.clear();
+                cin.ignore(1000, '\n');
+            }
 
-            cout << "\nStudent added succesfully!\n";
-        }   
+            Student newStudent(id, name, age, major, gpa);
 
-        else if (choice == 2) {
+            students.push_back(newStudent);
+
+            cout << "\nStudent added successfully!\n";
+        }
+
+        else if (choice == 2)
+        {
             if (students.empty())
-            cout << "\nNo students found.\n";
-            else {
-                cout << "\n==========STUDENT LIST==========\n";
+            {
+                cout << "\nNo students found.\n";
+            }
+            else
+            {
+                cout << "\n========== STUDENT LIST ==========\n";
 
-                for (int i = 0; students.size() ; i++) {
-                    cout << "\n Student number" << i+1 << endl;
+                for (int i = 0; i < students.size(); i++)
+                {
+                    cout << "\nStudent number " << i + 1 << endl;
+                    cout << "--------------------------\n";
+
                     students[i].displayInfo();
                 }
+            }
+        }
+
+        else if (choice == 3)
+        {
+            int searchId;
+            bool found = false;
+
+            cout << "\nEnter Student ID to search: ";
+
+            while (!(cin >> searchId))
+            {
+                cout << "Invalid ID. Please enter a number: ";
+                cin.clear();
+                cin.ignore(1000, '\n');
+            }
+
+            for (int i = 0; i < students.size(); i++)
+            {
+                if (students[i].getID() == searchId)
+                {
+                    cout << "\nStudent found!\n";
+                    cout << "--------------------------\n";
+
+                    students[i].displayInfo();
+
+                    found = true;
+                    break;
                 }
             }
-        } while (choice != 4);
-    }
+
+            if (!found)
+            {
+                cout << "\nStudent not found.\n";
+            }
+        }
+
+        else if (choice == 4)
+        {
+            cout << "\nExiting Student Management System...\n";
+        }
+
+        else
+        {
+            cout << "\nInvalid choice. Please select from 1 to 4.\n";
+        }
+
+    } while (choice != 4);
+
+    return 0;
+}
 
 
