@@ -3,39 +3,39 @@
 
 using namespace std;
 
-// Assumes the vector is sorted and contains at least two elements.
-pair<int, int> closestPairToZero(const vector<int>& numbers)
-{
-    size_t left = 0;
-    size_t right = numbers.size() - 1;
-    pair<int, int> closestPair = {numbers[left], numbers[right]};
-    int smallestDistance = abs(numbers[left] + numbers[right]);
+bool isPalindrome(const vector<int>& v) {
+    int left = 0;
+    int right = v.size() - 1;
 
-    while (left < right)
-    {
-        int sum = numbers[left] + numbers[right];
-        int distance = abs(sum);
+    while (left < right) {
+        if (v[left] != v[right])
+            return false;
 
-        if (distance < smallestDistance)
-        {
-            smallestDistance = distance;
-            closestPair = {numbers[left], numbers[right]};
-        }
+        left++;
+        right--;
+    }
 
-        if (sum == 0)
-        {
-            return {numbers[left], numbers[right]};
-        }
+    return true;
+}
 
-        if (sum < 0)
-        {
-            ++left;
-        }
-        else
-        {
-            --right;
+
+vector<int> findPairWithDifferenceK(const vector<int>& v, int k) {
+    for (int i = 0; i < v.size(); i++) {
+        for (int j = i + 1; j < v.size(); j++) {
+            if (v[i] - v[j] == k || v[j] - v[i] == k)
+                return {v[i], v[j]};
         }
     }
 
-    return closestPair;
+    return {};
+}
+
+int main () {
+    vector <int> v1 = {1, 2, 3, 2, 1};
+
+    if(isPalindrome (v1))
+    cout << "V1 is Palindrome.\n";
+
+    vector v2 = findPairWithDifferenceK (v1,2);
+
 }
