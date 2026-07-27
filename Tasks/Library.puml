@@ -1,0 +1,65 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+interface borrowable {
+    +borrowBook() : bool
+    +returnBook() : bool
+    +checkAvailability() : bool
+}
+
+class Book {
+    -title : string
+    -author : string
+    -bookId : int
+    -isAvailable : bool
+    -nextBookId : int {static}
+
+    +Book(title : string, author : string)
+    +assignBookId() : void
+    +getBookId() : int
+    +displayBookInfo() : void
+    +borrowBook() : bool
+    +returnBook() : bool
+    +checkAvailability() : bool
+}
+
+abstract class User {
+    #name : string
+    #id : int
+
+    +User(name : string, id : int)
+    +displayInfo() : void
+}
+
+class Student {
+    +Student(name : string, id : int)
+    +displayInfo() : void
+}
+
+class Teacher {
+    +Teacher(name : string, id : int)
+    +displayInfo() : void
+}
+
+class Library {
+    -books : vector<Book>
+    -users : vector<User*>
+
+    +addBook(title : string, author : string) : void
+    +addUser(user : User*) : void
+    +displayBooks() : void
+    +displayUsers() : void
+    +borrowBook(id : int) : bool
+    +returnBook(id : int) : bool
+}
+
+borrowable <|.. Book
+
+User <|-- Student
+User <|-- Teacher
+
+Library *-- "0..*" Book
+Library *-- "0..*" User
+
+@enduml
