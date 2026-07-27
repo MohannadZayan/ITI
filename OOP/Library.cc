@@ -5,7 +5,6 @@
 
 using namespace std;
 
-// An interface for every library item that can be borrowed.
 class borrowable {
 public:
     virtual bool borrowBook() = 0;
@@ -26,7 +25,6 @@ public:
     Book(const string& title, const string& author)
         : title(title), author(author), bookId(0), isAvailable(true) {}
 
-    // The Library calls this only when it adds the book.
     void assignBookId() {
         bookId = ++nextBookId;
     }
@@ -114,7 +112,6 @@ public:
         books.push_back(book);
     }
 
-    // The Library owns users added with this function.
     void addUser(User* user) {
         if (user != nullptr) {
             users.push_back(user);

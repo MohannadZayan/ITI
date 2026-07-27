@@ -37,5 +37,4 @@ int main () {
     cout << "V1 is Palindrome.\n";
 
     vector v2 = findPairWithDifferenceK (v1,2);
-
 }
