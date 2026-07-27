@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <unordered_set>
 
 using namespace std;
 
@@ -20,32 +21,29 @@ int NumberOfWords(const string& sentence)
     return sentence.empty() ? 0 : wordCount;
 }
 
-void PrintMissingElements(const vector<int>& numbers)
+void PrintMissingElements(const vector<int>& vec, int min, int max)
 {
-    if (numbers.empty())
-    {
-        return;
-    }
-
-    vector<int> sortedNumbers = numbers;
-    sort(sortedNumbers.begin(), sortedNumbers.end());
+    unordered_set<int> elements(vec.begin(), vec.end());
 
     cout << "Missing elements: ";
+    bool hasMissing = false;
 
-    int i = sortedNumbers.front();
-
-    for (int number : sortedNumbers)
+    for (int i = min; i <= max; ++i)
     {
-        while (i < number)
+        if (elements.find(i) == elements.end())
         {
-            cout << i << ' ';
-            ++i;
+            if (hasMissing)
+            {
+                cout << ", ";
+            }
+            cout << i;
+            hasMissing = true;
         }
+    }
 
-        if (i == number)
-        {
-            ++i;
-        }
+    if (!hasMissing)
+    {
+        cout << "None";
     }
 }
 
@@ -55,7 +53,7 @@ int main()
     vector<int> numbers = {1, 2, 5, 6};
 
     cout << "Number of words: " << NumberOfWords(sentence) << '\n';
-    PrintMissingElements(numbers);
+    PrintMissingElements(numbers, 1, 6);
     cout << '\n';
 
     return 0;
