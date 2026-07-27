@@ -24,27 +24,15 @@ int NumberOfWords(const string& sentence)
 void PrintMissingElements(const vector<int>& vec, int min, int max)
 {
     unordered_set<int> elements(vec.begin(), vec.end());
-
     cout << "Missing elements: ";
-    bool hasMissing = false;
 
-    for (int i = min; i <= max; ++i)
-    {
-        if (elements.find(i) == elements.end())
-        {
-            if (hasMissing)
-            {
-                cout << ", ";
-            }
-            cout << i;
-            hasMissing = true;
+    for (int i = min; i <= max; i++) {
+        if (elements.find(i) == elements.end()) { //ya3ny mal2etsh el element i
+            cout << i << ", ";
         }
     }
+    cout << endl;
 
-    if (!hasMissing)
-    {
-        cout << "None";
-    }
 }
 
 int main()
