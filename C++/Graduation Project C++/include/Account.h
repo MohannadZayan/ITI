@@ -31,7 +31,7 @@ public:
 
     // Banking operations
     virtual void deposit(double amount);
-    virtual void withdraw(double amount);
+    virtual void withdraw(double amount) = 0;             //Pure virtual function 3shan el implementation mokhtalef mn saving l checking
 
     // Pure virtual functions
     virtual void display() const = 0;
