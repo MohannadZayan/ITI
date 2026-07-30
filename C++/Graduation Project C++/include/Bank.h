@@ -6,8 +6,6 @@
 #include <memory>
 
 #include "Account.h"
-#include "CheckingAccount.h"
-#include "SavingsAccount.h"
 
 using namespace std;
 
@@ -22,24 +20,24 @@ class Bank {
 
     //ACCOUNT MANAGEMENT:
 
-    void createAccount (string id, string owner, double initialBalance, string type, double overdraftLimit = 0);        //Here, the overdraft limit is set to 0 by default to see if it's a checking or savings account
+    void createAccount (const string &id, const string &owner, double initialBalance, const string &type, double overdraftLimit = 0);        //Here, the overdraft limit is set to 0 by default to see if it's a checking or savings account
 
-    void deleteAccount (string id);
+    void deleteAccount (const string &id);
 
     //ACCOUNT SEARCHING:
 
-    shared_ptr<Account> findAccount (string id);
-    bool accountExists (string id) const;
+    shared_ptr<Account> findAccount (const string &id) const;
+    bool accountExists (const string &id) const;
 
     //BANK OPERATIONS:
 
-    void deposit (string id, double amount);
-    void withdraw (string id, double amount);
+    void deposit (const string &id, double amount);
+    void withdraw (const string &id, double amount);
 
     //BANK INFORMATION:
     void displayAllAccounts() const;
 
-    //FILE HANDLINE:
+    //FILE HANDLING:
 
     void saveAccounts() const;
     void loadAccounts();
