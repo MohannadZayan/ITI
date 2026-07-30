@@ -151,14 +151,18 @@ void Bank::loadAccounts()
         throw runtime_error("Failed to open accounts.txt for reading.");
     }
 
-    // Clear any existing accounts to avoid duplicates
-    accounts.clear();
-
     string line;
+    vector<shared_ptr<Account>> loadedAccounts;
+    size_t lineNumber = 0;
 
     // Read the file one line at a time, loads one account per iteration
     while (getline(file, line))
     {
+        ++lineNumber;
+        if (line.empty()) {
+            continue;
+        }
+
         stringstream ss(line);
 
         // Variables to store the data
@@ -173,27 +177,46 @@ void Bank::loadAccounts()
         getline(ss, owner, ',');
         getline(ss, balanceStr, ',');
 
-        // Convert balance from string to double
-        double balance = stod(balanceStr);
+        if (type.empty() || id.empty() || owner.empty() || balanceStr.empty()) {
+            throw runtime_error("Invalid account record on line " + to_string(lineNumber) + ".");
+        }
 
-        if (type == "Savings")
+        double balance;
+        try {
+            balance = stod(balanceStr);
+        }
+        catch (const exception &) {
+            throw runtime_error("Invalid balance on line " + to_string(lineNumber) + ".");
+        }
+
+        // Accept files saved by earlier versions, which stored the display name.
+        if (type == "Savings" || type == "Savings Account")
         {
-            accounts.push_back(
+            loadedAccounts.push_back(
                 make_shared<SavingsAccount>(
                     id,
                     owner,
                     balance));
         }
-        else if (type == "Checking")
+        else if (type == "Checking" || type == "Checking Account")
         {
             // Read the overdraft limit (only Checking accounts have this field)
             string overdraftStr;
             getline(ss, overdraftStr, ',');
 
-            // Convert it to a double
-            double overdraftLimit = stod(overdraftStr);
+            if (overdraftStr.empty()) {
+                throw runtime_error("Missing overdraft limit on line " + to_string(lineNumber) + ".");
+            }
 
-            accounts.push_back(
+            double overdraftLimit;
+            try {
+                overdraftLimit = stod(overdraftStr);
+            }
+            catch (const exception &) {
+                throw runtime_error("Invalid overdraft limit on line " + to_string(lineNumber) + ".");
+            }
+
+            loadedAccounts.push_back(
                 make_shared<CheckingAccount>(
                     id,
                     owner,
@@ -202,11 +225,12 @@ void Bank::loadAccounts()
         }
         else
         {
-            throw runtime_error("Invalid account type found in accounts.txt.");
+            throw runtime_error("Invalid account type on line " + to_string(lineNumber) + ".");
         }
     }
 
     file.close();
+    accounts = move(loadedAccounts);
 
     cout << "Successfully loaded accounts from accounts.txt." << endl;
 }

@@ -1,0 +1,27 @@
+print_content() {
+    ls
+}
+
+go_to() {
+    cd "$1"
+}
+
+search() {
+    grep --color=auto "$1" "$2"
+}
+
+show_file() {
+    cat -n "$1"
+}
+
+remove() {
+    rm -i "$1"
+}
+
+make_dir() {
+    mkdir -p "$1"
+}
+
+create_file() {
+    touch "$1"
+}

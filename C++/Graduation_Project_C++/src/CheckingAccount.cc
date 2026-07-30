@@ -1,4 +1,4 @@
-#include <../include/CheckingAccount.h>
+#include "../include/CheckingAccount.h"
 #include <iostream>
 #include <stdexcept>
 #include <iomanip> //for setprecision
@@ -14,7 +14,7 @@ CheckingAccount::CheckingAccount (string id, string owner, double initialBalance
              throw invalid_argument ("Withdrawal amount must be greater than zero.");
          }
 
-         if (balance -amount <overdraftLimit) {
+         if (balance - amount < -overdraftLimit) {
              throw runtime_error ("Exceeded overdraft limit.");
          }
 
@@ -36,7 +36,7 @@ CheckingAccount::CheckingAccount (string id, string owner, double initialBalance
  }
 
  string CheckingAccount::getType() const {
-     return "Checking Account";
+     return "Checking";
  }
 
  string CheckingAccount::serialize() const {

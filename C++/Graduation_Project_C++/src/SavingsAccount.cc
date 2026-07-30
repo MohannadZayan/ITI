@@ -38,7 +38,7 @@ void SavingsAccount::display() const {
 }
 
 string SavingsAccount::getType() const {
-    return "Savings Account";
+    return "Savings";
 }
 
 string SavingsAccount::serialize() const {

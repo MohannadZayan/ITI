@@ -1,0 +1,4 @@
+CREATE | 1 | Mohannad | 1000.000000 | Savings
+CREATE | 2 | Zayan | 100000.000000 | Checking | 100000.000000
+WITHDRAW | 1 | 1000.000000
+CREATE | 3 | Youssef | 10000.000000 | Savings

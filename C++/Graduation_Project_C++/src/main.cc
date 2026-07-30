@@ -27,6 +27,12 @@ int main()
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     };
 
+    auto waitForMenu = []()
+    {
+        cout << "\nPress Enter to return to the main menu...";
+        cin.get();
+    };
+
     int choice;
 
     while (true)
@@ -238,10 +244,13 @@ case 9:
                 cout << "Invalid menu choice." << endl;
                 break;
             }
+
+            waitForMenu();
         }
         catch (const exception &e)
         {
             cout << "Error: " << e.what() << endl;
+            waitForMenu();
         }
     }
 }

@@ -1,0 +1,3 @@
+Savings,1,Mohannad,0.000000
+Checking,2,Zayan,100000.000000,100000.000000
+Savings,3,Youssef,10000.000000
