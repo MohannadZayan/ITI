@@ -1,0 +1,135 @@
+Linux Detective Report
+
+========================================
+1. Current Shell
+========================================
+
+Command:
+ps
+
+Output:
+PID TTY          TIME CMD
+34260 pts/1    00:00:00 bash
+34416 pts/1    00:00:00 ps
+
+Explanation:
+The `ps` command shows the running processes in the current terminal. The `CMD` column shows that the current shell is `bash`.
+
+========================================
+2. Shell PID
+========================================
+
+Command:
+ps
+
+Output:
+PID TTY          TIME CMD
+34260 pts/1    00:00:00 bash
+34416 pts/1    00:00:00 ps
+
+Explanation:
+The `PID` column shows the Process ID of each running process. The PID of the current shell (`bash`) is 34260.
+
+========================================
+3. Parent PID (PPID)
+========================================
+
+Command:
+echo $PPID
+
+Output:
+34228
+
+Explanation:
+The `PPID` variable stores the Process ID of the parent process that started the current shell.
+
+========================================
+4. Current User
+========================================
+
+Command:
+echo $USER
+
+Output:
+mohannad-zayan
+
+Explanation:
+The `USER` environment variable displays the username of the currently logged-in user.
+
+========================================
+5. Current Working Directory
+========================================
+
+Command:
+pwd
+
+Output:
+/home/mohannad-zayan
+
+Explanation:
+The `pwd` command displays the full path of the current working directory.
+
+========================================
+6. Home Directory
+========================================
+
+Command:
+echo $HOME
+
+Output:
+/home/mohannad-zayan
+
+Explanation:
+The `HOME` environment variable displays the path to the user's home directory.
+
+========================================
+7. Hostname
+========================================
+
+Command:
+hostname
+
+Output:
+mohannad-zayan-B550M-GAMING
+
+Explanation:
+The `hostname` command displays the name of the current computer on the network.
+
+========================================
+8. Login Shell
+========================================
+
+Command:
+grep "^$USER:" /etc/passwd
+
+Output:
+mohannad-zayan:x:1000:1000:Mohannad Zayan,,,:/home/mohannad-zayan:/bin/bash
+
+Explanation:
+The command searches for the current user's entry in `/etc/passwd`. The last field shows the default login shell, which is `/bin/bash`.
+
+========================================
+9. PATH
+========================================
+
+Command:
+echo $PATH
+
+Output:
+<your PATH output>
+
+Explanation:
+The `PATH` environment variable contains the directories Linux searches to find executable commands.
+
+========================================
+10. Number of Environment Variables
+========================================
+
+Command:
+env | wc -l
+
+Output:
+<your environment variable count>
+
+Explanation:
+The command counts the total number of environment variables in the current shell.

@@ -1,0 +1,77 @@
+# Assignment 2 – Environment Variable Mystery Report
+
+## Steps Performed
+
+1. Created the environment variable using:
+
+```bash
+export COMPANY=ITI
+```
+
+2. Verified that it exists in the current shell:
+
+```bash
+echo $COMPANY
+```
+
+Output:
+
+```
+ITI
+```
+
+3. Opened a child shell using:
+
+```bash
+bash
+```
+
+Then verified the variable again:
+
+```bash
+echo $COMPANY
+```
+
+Output:
+
+```
+ITI
+```
+
+The child shell inherited the exported environment variable from the parent shell.
+
+4. Opened a new terminal and checked the variable:
+
+```bash
+echo $COMPANY
+```
+
+Initially, no output was displayed because the variable only existed for the current shell session.
+
+5. Made the variable persistent by adding the following line to the `~/.bashrc` file:
+
+```bash
+export COMPANY=ITI
+```
+
+Then reloaded the file using:
+
+```bash
+source ~/.bashrc
+```
+
+6. Opened a new terminal and verified the variable again:
+
+```bash
+echo $COMPANY
+```
+
+Output:
+
+```
+ITI
+```
+
+## Why I Selected `~/.bashrc`
+
+I modified the `~/.bashrc` file because my default shell is **Bash**. The `~/.bashrc` file is executed whenever a new interactive Bash terminal starts.
