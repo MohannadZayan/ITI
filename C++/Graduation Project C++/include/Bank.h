@@ -14,6 +14,8 @@ class Bank {
     private :
     vector <shared_ptr<Account>> accounts; //vector of smart pointers to accounts
 
+    void logTransactions (const string & transaction) const;
+
     public : 
 
     Bank ();      //Constructor
@@ -36,6 +38,7 @@ class Bank {
 
     //BANK INFORMATION:
     void displayAllAccounts() const;
+    void displayAccount (const string &id) const;
 
     //FILE HANDLING:
 
