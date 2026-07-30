@@ -116,7 +116,7 @@ case 1:
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    bank.createAccount(id, owner, type, balance, overdraft);
+    bank.createAccount(id, owner, balance, type, overdraft);
 
     break;
 }
