@@ -74,6 +74,8 @@ void Bank :: deleteAccount (const string &id) {
     cout << "Successfully deleted account with id: " << id << endl;
 }
 
+
+//=====DEPOSIT=====
 void Bank :: deposit (const string &id, double amount) {
     auto account = findAccount (id);
 
@@ -84,6 +86,8 @@ void Bank :: deposit (const string &id, double amount) {
     account->deposit (amount);
     logTransactions ( "DEPOSIT | " + id + " | " + to_string(amount));
 }
+
+
 
 //=====WITHDRAW=====
 void Bank :: withdraw (const string &id, double amount) {
@@ -97,6 +101,8 @@ void Bank :: withdraw (const string &id, double amount) {
     logTransactions ( "WITHDRAW | " + id + " | " + to_string(amount));
 }
 
+
+//=====TRANSFER MONEY=====
 void Bank :: transferMoney (const string &fromID, const string &toID, double amount) {
     if (fromID == toID) {
         throw invalid_argument("Cannot transfer money to the same account.");
@@ -119,6 +125,7 @@ void Bank :: transferMoney (const string &fromID, const string &toID, double amo
 }
 
 
+
 //=====DISPLAY ALL ACCOUNTS=====
 void Bank :: displayAllAccounts() const {
 
@@ -135,7 +142,7 @@ void Bank :: displayAllAccounts() const {
     cout  << "Total number of accounts: " << Account::getAccountCount() << endl;
 }
 
-//=====DISPLAY ACCOUNT=====
+//=====DISPLAY ONE ACCOUNT=====
 
 void Bank :: displayAccount (const string &id) const {
     auto account = findAccount (id);

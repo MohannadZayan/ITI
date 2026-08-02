@@ -30,7 +30,7 @@ int main()
     auto waitForMenu = []()
     {
         cout << "\nPress Enter to return to the main menu...";
-        cin.get();
+        cin.get(); // recieves an input but discards it
     };
 
     int choice;
