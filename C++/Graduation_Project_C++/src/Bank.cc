@@ -97,6 +97,27 @@ void Bank :: withdraw (const string &id, double amount) {
     logTransactions ( "WITHDRAW | " + id + " | " + to_string(amount));
 }
 
+void Bank :: transferMoney (const string &fromID, const string &toID, double amount) {
+    if (fromID == toID) {
+        throw invalid_argument("Cannot transfer money to the same account.");
+    }
+
+    auto fromAccount = findAccount(fromID);
+    auto toAccount = findAccount(toID);
+
+    if (fromAccount == nullptr || toAccount == nullptr) {
+        throw invalid_argument("One or both accounts do not exist.");
+    }
+
+    if (amount > fromAccount->getBalance()) {
+        throw runtime_error("Insufficient funds in account.");
+    }
+
+    fromAccount->withdraw(amount);
+    toAccount->deposit(amount);
+    logTransactions("TRANSFER | " + fromID + " | " + toID + " | " + to_string(amount));
+}
+
 
 //=====DISPLAY ALL ACCOUNTS=====
 void Bank :: displayAllAccounts() const {

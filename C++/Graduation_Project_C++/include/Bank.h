@@ -35,6 +35,7 @@ class Bank {
 
     void deposit (const string &id, double amount);
     void withdraw (const string &id, double amount);
+    void transferMoney (const string &fromID, const string &toID, double amount);
 
     //BANK INFORMATION:
     void displayAllAccounts() const;
