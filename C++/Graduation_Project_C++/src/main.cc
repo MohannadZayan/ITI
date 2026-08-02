@@ -51,6 +51,8 @@ int main()
 
         cout << "Enter your choice: ";
 
+        cout << endl << endl;
+
         if (!(cin >> choice))
         {
             cout << "Invalid input. Please enter a valid number." << endl;
