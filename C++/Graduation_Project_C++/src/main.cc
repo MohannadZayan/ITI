@@ -46,6 +46,7 @@ int main()
         cout << "4. Withdraw\n";
         cout << "5. Display All Accounts\n";
         cout << "6. Search Account\n";
+        cout << "7. Transfer Money\n";
         cout << "9. Exit\n";
         cout << "=====================================\n";
 
@@ -230,6 +231,45 @@ case 6:
     }
 
     bank.displayAccount(id);
+
+    break;
+}
+
+case 7:
+{
+    string fromID;
+    string toID;
+    double amount;
+
+    cout << "Enter Source Account ID: ";
+    getline(cin, fromID);
+
+    while (fromID.empty())
+    {
+        cout << "ID cannot be empty. Try again: ";
+        getline(cin, fromID);
+    }
+
+    cout << "Enter Destination Account ID: ";
+    getline(cin, toID);
+
+    while (toID.empty())
+    {
+        cout << "ID cannot be empty. Try again: ";
+        getline(cin, toID);
+    }
+
+    cout << "Enter Transfer Amount: ";
+
+    while (!(cin >> amount) || amount <= 0)
+    {
+        cout << "Invalid amount. Try again: ";
+        clearInput();
+    }
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    bank.transferMoney(fromID, toID, amount);
 
     break;
 }
