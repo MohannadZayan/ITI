@@ -35,6 +35,7 @@ qt_add_qml_module(appSmart_Home
             Images/garage_2.jpeg
             Images/Light-bulb.png
             QML_FILES settingsPage.qml
+            QML_FILES DeviceCard.qml
 
 )
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

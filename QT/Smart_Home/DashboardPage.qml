@@ -21,10 +21,8 @@ Page {
         Label {
             text: "Smart Home Dashboard"
             color: "white"
-
             font.pixelSize: 42
             font.bold: true
-
             Layout.alignment: Qt.AlignHCenter
         }
 
@@ -38,463 +36,92 @@ Page {
                 width: parent.width
                 spacing: 45
 
-                //=====LIVING ROOM LIGHT=====
-
-                Rectangle {
-
-                    width: parent.width
-                    height: 240
-
-                    radius: 15
-                    color: "#2D3250"
-
-                    RowLayout {
-
-                        anchors.fill: parent
-                        anchors.margins: 20
-                        spacing: 35
-
-                        Image {
-                            source: "qrc:/qt/qml/Smart_Home/Images/Light-bulb.png"
-
-                            Layout.preferredWidth: 100
-                            Layout.preferredHeight: 100
-
-                            fillMode: Image.PreserveAspectFit
-
-                            sourceSize.width: 100
-                            sourceSize.height: 100
-                        }
-
-                        ColumnLayout {
-
-                            spacing: 10
-
-                            Label {
-                                text: "Living Room Light"
-                                color: "white"
-                                font.pixelSize: 28
-                                font.bold: true
-                            }
-
-                            Label {
-                                text: "Status : " + Math.round(lightProgress.value * 100) + "%"
-                                color: "lightgray"
-                                font.pixelSize: 18
-                            }
-
-                            ProgressBar {
-                                id: lightProgress
-                                value: 0.0
-                                Layout.preferredWidth: 320
-                                Layout.preferredHeight: 15
-
-                                Behavior on value {
-                                    NumberAnimation {
-                                        duration: 500
-                                    }
-                                }
-                            }
-
-                        }
-
-                        Item {
-                            Layout.fillWidth: true
-                        }
-
-                        Switch {
-
-                               scale: 1.5
-
-                            onCheckedChanged: {
-
-                             if (checked) {
-                            lightProgress.value = 1.0
-                            console.log("Living Room Light: ON")
-                                                        }
-                             else {
-                            lightProgress.value = 0.0
-                            console.log("Living Room Light: OFF")
-                            }
-
-                            }
-
-                        }
-
-                    }
-
-
+                DeviceCard {
+                    deviceName: "Living Room Light"
+                    imageSource: "qrc:/qt/qml/Smart_Home/Images/Light-bulb.png"
+                    popup: notificationPopup
                 }
 
-                //=====BEDROOM LIGHT=====
-
-
-                Rectangle {
-
-                    width: parent.width
-                    height: 240
-
-                    radius: 15
-                    color: "#2D3250"
-
-                    RowLayout {
-
-                        anchors.fill: parent
-                        anchors.margins: 20
-                        spacing: 35
-
-                        Image {
-                            source: "qrc:/qt/qml/Smart_Home/Images/light_bed.png"
-
-                            Layout.preferredWidth: 100
-                            Layout.preferredHeight: 100
-
-                            fillMode: Image.PreserveAspectFit
-
-                            sourceSize.width: 100
-                            sourceSize.height: 100
-                        }
-
-                        ColumnLayout {
-
-                            spacing: 10
-
-                            Label {
-                                text: "Bedroom Light"
-                                color: "white"
-                                font.pixelSize: 28
-                                font.bold: true
-                            }
-
-                            Label {
-                                text: "Status : " + Math.round(bedroomProgress.value * 100) + "%"
-                                color: "lightgray"
-                                font.pixelSize: 18
-                            }
-
-                            ProgressBar {
-                                id: bedroomProgress
-                                value: 0.0
-
-                                Layout.preferredWidth: 320
-                                Layout.preferredHeight: 15
-
-                                Behavior on value {
-                                    NumberAnimation {
-                                        duration: 500
-                                    }
-                                }
-                            }
-
-                        }
-
-                        Item {
-                            Layout.fillWidth: true
-                        }
-
-                        Switch {
-
-                            scale: 1.5
-
-                            onCheckedChanged: {
-
-                                if (checked) {
-                                    bedroomProgress.value = 1.0
-                                    console.log("Bedroom Light: ON")
-                                } else {
-                                    bedroomProgress.value = 0.0
-                                    console.log("Bedroom Light: OFF")
-                                }
-
-                            }
-
-                        }
-
-                    }
-
+                DeviceCard {
+                    deviceName: "Bedroom Light"
+                    imageSource: "qrc:/qt/qml/Smart_Home/Images/light_bed.png"
+                    popup: notificationPopup
                 }
 
-                //=====AIR CONDITIONER=====
-
-
-                Rectangle {
-
-                    width: parent.width
-                    height: 240
-
-                    radius: 15
-                    color: "#2D3250"
-
-                    RowLayout {
-
-                        anchors.fill: parent
-                        anchors.margins: 20
-                        spacing: 35
-
-                        Image {
-                            source: "qrc:/qt/qml/Smart_Home/Images/images.png"
-
-                            Layout.preferredWidth: 100
-                            Layout.preferredHeight: 100
-
-                            fillMode: Image.PreserveAspectFit
-
-                            sourceSize.width: 100
-                            sourceSize.height: 100
-                        }
-
-                        ColumnLayout {
-
-                            spacing: 10
-
-                            Label {
-                                text: "Air Conditioner"
-                                color: "white"
-                                font.pixelSize: 28
-                                font.bold: true
-                            }
-
-                            Label {
-                                text: "Status : " + Math.round(acProgress.value * 100) + "%"
-                                color: "lightgray"
-                                font.pixelSize: 18
-                            }
-
-                            ProgressBar {
-                                id: acProgress
-                                value: 0.0
-
-                                Layout.preferredWidth: 320
-                                Layout.preferredHeight: 15
-
-                                Behavior on value {
-                                    NumberAnimation {
-                                        duration: 500
-                                    }
-                                }
-                            }
-
-                        }
-
-                        Item {
-                            Layout.fillWidth: true
-                        }
-
-                        Switch {
-
-                            scale: 1.5
-
-                            onCheckedChanged: {
-
-                                if (checked) {
-                                    acProgress.value = 1.0
-                                    console.log("Air Conditioner: ON")
-                                } else {
-                                    acProgress.value = 0.0
-                                    console.log("Air Conditioner: OFF")
-                                }
-
-                            }
-
-                        }
-
-                    }
-
+                DeviceCard {
+                    deviceName: "Air Conditioner"
+                    imageSource: "qrc:/qt/qml/Smart_Home/Images/images.png"
+                    popup: notificationPopup
                 }
 
-                //=====FAN=====
-
-
-                Rectangle {
-
-                    width: parent.width
-                    height: 240
-
-                    radius: 15
-                    color: "#2D3250"
-
-                    RowLayout {
-
-                        anchors.fill: parent
-                        anchors.margins: 20
-                        spacing: 35
-
-                        Image {
-                            source: "qrc:/qt/qml/Smart_Home/Images/fan_2.jpeg"
-
-                            Layout.preferredWidth: 100
-                            Layout.preferredHeight: 100
-
-                            fillMode: Image.PreserveAspectFit
-
-                            sourceSize.width: 100
-                            sourceSize.height: 100
-                        }
-
-                        ColumnLayout {
-
-                            spacing: 10
-
-                            Label {
-                                text: "Fan"
-                                color: "white"
-                                font.pixelSize: 28
-                                font.bold: true
-                            }
-
-                            Label {
-                                text: "Status : " + Math.round(fanProgress.value * 100) + "%"
-                                color: "lightgray"
-                                font.pixelSize: 18
-                            }
-
-                            ProgressBar {
-                                id: fanProgress
-                                value: 0.0
-
-                                Layout.preferredWidth: 320
-                                Layout.preferredHeight: 15
-
-                                Behavior on value {
-                                    NumberAnimation {
-                                        duration: 500
-                                    }
-                                }
-                            }
-
-                        }
-
-                        Item {
-                            Layout.fillWidth: true
-                        }
-
-                        Switch {
-
-                            scale: 1.5
-
-                            onCheckedChanged: {
-
-                                if (checked) {
-                                    fanProgress.value = 1.0
-                                    console.log("Fan: ON")
-                                } else {
-                                    fanProgress.value = 0.0
-                                    console.log("Fan: OFF")
-                                }
-
-                            }
-
-                        }
-
-                    }
-
+                DeviceCard {
+                    deviceName: "Fan"
+                    imageSource: "qrc:/qt/qml/Smart_Home/Images/fan_2.jpeg"
+                    popup: notificationPopup
                 }
 
-                //=====GARAGE=====
-
-
-                Rectangle {
-
-                    width: parent.width
-                    height: 240
-
-                    radius: 15
-                    color: "#2D3250"
-
-                    RowLayout {
-
-                        anchors.fill: parent
-                        anchors.margins: 20
-                        spacing: 35
-
-                        Image {
-                            source: "qrc:/qt/qml/Smart_Home/Images/garage_2.jpeg"
-
-                            Layout.preferredWidth: 100
-                            Layout.preferredHeight: 100
-
-                            fillMode: Image.PreserveAspectFit
-
-                            sourceSize.width: 100
-                            sourceSize.height: 100
-                        }
-
-                        ColumnLayout {
-
-                            spacing: 10
-
-                            Label {
-                                text: "Garage Door"
-                                color: "white"
-                                font.pixelSize: 28
-                                font.bold: true
-                            }
-
-                            Label {
-                                text: "Status : " + Math.round(garageProgress.value * 100) + "%"
-                                color: "lightgray"
-                                font.pixelSize: 18
-                            }
-
-                            ProgressBar {
-                                id: garageProgress
-                                value: 0.0
-
-                                Layout.preferredWidth: 320
-                                Layout.preferredHeight: 15
-
-                                Behavior on value {
-                                    NumberAnimation {
-                                        duration: 500
-                                    }
-                                }
-                            }
-
-                        }
-
-                        Item {
-                            Layout.fillWidth: true
-                        }
-
-                        Switch {
-
-                            scale: 1.5
-
-                            onCheckedChanged: {
-
-                                if (checked) {
-                                    garageProgress.value = 1.0
-                                    console.log("Garage Door: OPEN")
-                                } else {
-                                    garageProgress.value = 0.0
-                                    console.log("Garage Door: CLOSED")
-                                }
-
-                            }
-
-                        }
-
-                    }
-
+                DeviceCard {
+                    deviceName: "Garage Door"
+                    imageSource: "qrc:/qt/qml/Smart_Home/Images/garage_2.jpeg"
+                    popup: notificationPopup
                 }
 
             }
-
 
         }
 
         Button {
-
             text: "Settings"
-
             Layout.alignment: Qt.AlignHCenter
 
-            onClicked: {
-                dashboardPage.StackView.view.push("settingsPage.qml")
-            }
+            onClicked: dashboardPage.goToSettings()
         }
-
 
     }
 
+    function goToSettings() {
+        StackView.view.push("settingsPage.qml")
+    }
+
+    Popup {
+
+        id: notificationPopup
+
+        x: (parent.width - width) / 2
+        y: 20
+
+        width: 320
+        height: 60
+
+        modal: false
+        focus: false
+
+        background: Rectangle {
+            color: "#34495E"
+            radius: 12
+            border.color: "#5DADE2"
+            border.width: 2
+        }
+
+        Label {
+            id: popupText
+            anchors.centerIn: parent
+            color: "white"
+            font.pixelSize: 18
+            font.bold: true
+        }
+
+        Timer {
+            id: popupTimer
+            interval: 1500
+            repeat: false
+            onTriggered: notificationPopup.close()
+        }
+
+        function showMessage(message) {
+            popupText.text = message
+            notificationPopup.open()
+            popupTimer.restart()
+        }
+    }
 }
