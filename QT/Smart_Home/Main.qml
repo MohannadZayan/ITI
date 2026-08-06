@@ -6,8 +6,11 @@ import QtQuick.Controls
 ApplicationWindow {
     id: window
 
-    width: 640
-    height: 480
+    // Start at a useful desktop size, while keeping the window resizable.
+    width: 1280
+    height: 800
+    minimumWidth: 960
+    minimumHeight: 640
 
     visible: true
     title: "Smart Home Dashboard"

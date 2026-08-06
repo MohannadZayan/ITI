@@ -16,65 +16,99 @@ Page {
 
         anchors.fill: parent
         anchors.margins: 20
-        spacing: 40
+        spacing: 24
 
-        Label {
-            text: "Smart Home Dashboard"
-            color: "white"
-            font.pixelSize: 42
-            font.bold: true
-            Layout.alignment: Qt.AlignHCenter
+        RowLayout {
+            Layout.fillWidth: true
+
+            Label {
+                text: "Smart Home Dashboard"
+                color: "white"
+                font.pixelSize: 42
+                font.bold: true
+            }
+
+            Item {
+                Layout.fillWidth: true
+            }
+
+            Button {
+                text: "Settings"
+                onClicked: dashboardPage.goToSettings()
+            }
         }
 
         ScrollView {
+            id: deviceScrollView
 
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            Column {
+            GridLayout {
+                id: deviceGrid
 
-                width: parent.width
-                spacing: 45
+                width: deviceScrollView.availableWidth
+                columns: width >= 1100 ? 2 : 1
+                columnSpacing: 32
+                rowSpacing: 32
 
                 DeviceCard {
                     deviceName: "Living Room Light"
+                    roomName: "Living room"
+                    accentColor: "#F6B93B"
                     imageSource: "qrc:/qt/qml/Smart_Home/Images/Light-bulb.png"
                     popup: notificationPopup
+                    Layout.preferredWidth: deviceGrid.columns === 2
+                                           ? (deviceGrid.width - deviceGrid.columnSpacing) / 2
+                                           : deviceGrid.width
                 }
 
                 DeviceCard {
                     deviceName: "Bedroom Light"
+                    roomName: "Bedroom"
+                    accentColor: "#F6B93B"
                     imageSource: "qrc:/qt/qml/Smart_Home/Images/light_bed.png"
                     popup: notificationPopup
+                    Layout.preferredWidth: deviceGrid.columns === 2
+                                           ? (deviceGrid.width - deviceGrid.columnSpacing) / 2
+                                           : deviceGrid.width
                 }
 
                 DeviceCard {
                     deviceName: "Air Conditioner"
+                    roomName: "Living room"
+                    accentColor: "#47B5FF"
                     imageSource: "qrc:/qt/qml/Smart_Home/Images/images.png"
                     popup: notificationPopup
+                    Layout.preferredWidth: deviceGrid.columns === 2
+                                           ? (deviceGrid.width - deviceGrid.columnSpacing) / 2
+                                           : deviceGrid.width
                 }
 
                 DeviceCard {
                     deviceName: "Fan"
+                    roomName: "Bedroom"
+                    accentColor: "#B084F5"
                     imageSource: "qrc:/qt/qml/Smart_Home/Images/fan_2.jpeg"
                     popup: notificationPopup
+                    Layout.preferredWidth: deviceGrid.columns === 2
+                                           ? (deviceGrid.width - deviceGrid.columnSpacing) / 2
+                                           : deviceGrid.width
                 }
 
                 DeviceCard {
                     deviceName: "Garage Door"
+                    roomName: "Garage"
+                    accentColor: "#5ED7A5"
                     imageSource: "qrc:/qt/qml/Smart_Home/Images/garage_2.jpeg"
                     popup: notificationPopup
+                    Layout.preferredWidth: deviceGrid.columns === 2
+                                           ? (deviceGrid.width - deviceGrid.columnSpacing) / 2
+                                           : deviceGrid.width
                 }
 
             }
 
-        }
-
-        Button {
-            text: "Settings"
-            Layout.alignment: Qt.AlignHCenter
-
-            onClicked: dashboardPage.goToSettings()
         }
 
     }

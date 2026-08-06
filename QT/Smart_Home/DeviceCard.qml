@@ -3,111 +3,164 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Rectangle {
+    id: card
 
     property string deviceName: ""
+    property string roomName: "Smart device"
     property string imageSource: ""
+    property color accentColor: "#47B5FF"
     property var popup
 
-    width: parent.width
-    height: 240
+    implicitWidth: 460
+    implicitHeight: 240
+    Layout.fillWidth: true
+    Layout.preferredHeight: 240
 
-    radius: 15
-    color: "#2D3250"
+    radius: 18
+    color: hoverHandler.hovered ? "#343B5C" : "#2D3250"
+    border.width: 1
+    border.color: hoverHandler.hovered ? accentColor : "#414865"
+    scale: hoverHandler.hovered ? 1.015 : 1
+
+    Behavior on color { ColorAnimation { duration: 160 } }
+    Behavior on border.color { ColorAnimation { duration: 160 } }
+    Behavior on scale { NumberAnimation { duration: 160; easing.type: Easing.OutCubic } }
+
+    HoverHandler {
+        id: hoverHandler
+    }
 
     RowLayout {
-
         anchors.fill: parent
-        anchors.margins: 20
-        spacing: 35
+        anchors.margins: 26
+        spacing: 18
 
-        Image {
+        Rectangle {
+            Layout.preferredWidth: 96
+            Layout.preferredHeight: 96
+            radius: 16
+            color: Qt.rgba(card.accentColor.r, card.accentColor.g, card.accentColor.b, 0.18)
+            border.width: 1
+            border.color: Qt.rgba(card.accentColor.r, card.accentColor.g, card.accentColor.b, 0.45)
 
-            source: imageSource
-
-            Layout.preferredWidth: 100
-            Layout.preferredHeight: 100
-
-            fillMode: Image.PreserveAspectFit
-
-            sourceSize.width: 100
-            sourceSize.height: 100
+            Image {
+                anchors.centerIn: parent
+                width: 64
+                height: 64
+                source: card.imageSource
+                fillMode: Image.PreserveAspectFit
+            }
         }
 
         ColumnLayout {
-
-            spacing: 10
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignVCenter
+            spacing: 8
 
             Label {
-
-                text: deviceName
-
-                color: "white"
-
-                font.pixelSize: 28
+                text: card.roomName.toUpperCase()
+                color: "#9FA9C9"
+                font.pixelSize: 12
                 font.bold: true
+                font.letterSpacing: 1.2
             }
 
             Label {
-
-                text: "Status : " + Math.round(progress.value * 100) + "%"
-
-                color: "lightgray"
-
-                font.pixelSize: 18
+                text: card.deviceName
+                color: "#FFFFFF"
+                font.pixelSize: 24
+                font.bold: true
+                elide: Text.ElideRight
+                Layout.fillWidth: true
             }
 
-            ProgressBar {
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: 10
 
-                id: progress
+                Rectangle {
+                    Layout.preferredWidth: statusText.implicitWidth + 20
+                    Layout.preferredHeight: 26
+                    radius: 13
+                    color: deviceSwitch.checked
+                           ? Qt.rgba(card.accentColor.r, card.accentColor.g, card.accentColor.b, 0.22)
+                           : "#242A42"
 
-                value: 0.0
-
-                Layout.preferredWidth: 320
-                Layout.preferredHeight: 15
-
-                Behavior on value {
-
-                    NumberAnimation {
-                        duration: 500
+                    Label {
+                        id: statusText
+                        anchors.centerIn: parent
+                        text: deviceSwitch.checked ? "ON" : "OFF"
+                        color: deviceSwitch.checked ? card.accentColor : "#AAB2CC"
+                        font.pixelSize: 11
+                        font.bold: true
                     }
-
                 }
 
+                Label {
+                    text: deviceSwitch.checked ? "100%" : "0%"
+                    color: "#D7DCF0"
+                    font.pixelSize: 14
+                    font.bold: true
+                }
             }
 
-        }
+            Rectangle {
+                Layout.fillWidth: true
+                Layout.preferredHeight: 8
+                radius: height / 2
+                color: "#1F243B"
 
-        Item {
+                Rectangle {
+                    width: parent.width * (deviceSwitch.checked ? 1 : 0)
+                    height: parent.height
+                    radius: parent.radius
+                    color: card.accentColor
 
-            Layout.fillWidth: true
-
+                    Behavior on width {
+                        NumberAnimation { duration: 350; easing.type: Easing.OutCubic }
+                    }
+                }
+            }
         }
 
         Switch {
+            id: deviceSwitch
+            Layout.alignment: Qt.AlignVCenter
+            // A custom indicator does not always provide a reliable size to
+            // RowLayout. Reserve both visual and clickable space explicitly.
+            Layout.preferredWidth: 56
+            Layout.preferredHeight: 32
+            scale: 1.05
 
-            scale: 1.5
+            indicator: Rectangle {
+                implicitWidth: 54
+                implicitHeight: 30
+                radius: height / 2
+                color: deviceSwitch.checked ? card.accentColor : "#20263D"
+                border.width: 1
+                border.color: deviceSwitch.checked ? card.accentColor : "#58617D"
 
-            onCheckedChanged: {
+                Behavior on color { ColorAnimation { duration: 180 } }
 
-                if (checked) {
+                Rectangle {
+                    x: deviceSwitch.checked ? parent.width - width - 4 : 4
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 22
+                    height: 22
+                    radius: width / 2
+                    color: "#FFFFFF"
 
-                    progress.value = 1.0
-
-                    popup.showMessage (deviceName + " ON" )
-
+                    Behavior on x {
+                        NumberAnimation { duration: 180; easing.type: Easing.OutCubic }
+                    }
                 }
-                else {
-
-                    progress.value = 0.0
-
-                    popup.showMessage(deviceName + " OFF")
-
-                }
-
             }
 
+            contentItem: Item { }
+
+            onToggled: {
+                popup.showMessage(card.deviceName + (checked ? " ON" : " OFF"))
+            }
         }
-
     }
-
 }
