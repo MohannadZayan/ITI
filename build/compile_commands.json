@@ -1,0 +1,74 @@
+[
+{
+  "directory": "/home/mohannad-zayan/Desktop/ITI/build",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/home/mohannad-zayan/Desktop/ITI/build/appSmart_Home_autogen/include -I/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL -g -std=gnu++17 -o CMakeFiles/appSmart_Home.dir/appSmart_Home_autogen/mocs_compilation.cpp.o -c /home/mohannad-zayan/Desktop/ITI/build/appSmart_Home_autogen/mocs_compilation.cpp",
+  "file": "/home/mohannad-zayan/Desktop/ITI/build/appSmart_Home_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/appSmart_Home.dir/appSmart_Home_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/home/mohannad-zayan/Desktop/ITI/build",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/home/mohannad-zayan/Desktop/ITI/build/appSmart_Home_autogen/include -I/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL -g -std=gnu++17 -o CMakeFiles/appSmart_Home.dir/main.cpp.o -c /home/mohannad-zayan/Desktop/ITI/QT/Smart_Home/main.cpp",
+  "file": "/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home/main.cpp",
+  "output": "CMakeFiles/appSmart_Home.dir/main.cpp.o"
+},
+{
+  "directory": "/home/mohannad-zayan/Desktop/ITI/build",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/home/mohannad-zayan/Desktop/ITI/build/appSmart_Home_autogen/include -I/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL -g -std=gnu++17 -o CMakeFiles/appSmart_Home.dir/appsmart_home_qmltyperegistrations.cpp.o -c /home/mohannad-zayan/Desktop/ITI/build/appsmart_home_qmltyperegistrations.cpp",
+  "file": "/home/mohannad-zayan/Desktop/ITI/build/appsmart_home_qmltyperegistrations.cpp",
+  "output": "CMakeFiles/appSmart_Home.dir/appsmart_home_qmltyperegistrations.cpp.o"
+},
+{
+  "directory": "/home/mohannad-zayan/Desktop/ITI/build",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/home/mohannad-zayan/Desktop/ITI/build/appSmart_Home_autogen/include -I/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL -g -std=gnu++17 -o CMakeFiles/appSmart_Home.dir/.qt/rcc/qrc_qmake_Smart_Home.cpp.o -c /home/mohannad-zayan/Desktop/ITI/build/.qt/rcc/qrc_qmake_Smart_Home.cpp",
+  "file": "/home/mohannad-zayan/Desktop/ITI/build/.qt/rcc/qrc_qmake_Smart_Home.cpp",
+  "output": "CMakeFiles/appSmart_Home.dir/.qt/rcc/qrc_qmake_Smart_Home.cpp.o"
+},
+{
+  "directory": "/home/mohannad-zayan/Desktop/ITI/build",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/home/mohannad-zayan/Desktop/ITI/build/appSmart_Home_autogen/include -I/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL -g -std=gnu++17 -o CMakeFiles/appSmart_Home.dir/.rcc/qmlcache/appSmart_Home_qmlcache_loader.cpp.o -c /home/mohannad-zayan/Desktop/ITI/build/.rcc/qmlcache/appSmart_Home_qmlcache_loader.cpp",
+  "file": "/home/mohannad-zayan/Desktop/ITI/build/.rcc/qmlcache/appSmart_Home_qmlcache_loader.cpp",
+  "output": "CMakeFiles/appSmart_Home.dir/.rcc/qmlcache/appSmart_Home_qmlcache_loader.cpp.o"
+},
+{
+  "directory": "/home/mohannad-zayan/Desktop/ITI/build",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/home/mohannad-zayan/Desktop/ITI/build/appSmart_Home_autogen/include -I/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL -g -std=gnu++17 -o CMakeFiles/appSmart_Home.dir/.rcc/qmlcache/appSmart_Home_Main_qml.cpp.o -c /home/mohannad-zayan/Desktop/ITI/build/.rcc/qmlcache/appSmart_Home_Main_qml.cpp",
+  "file": "/home/mohannad-zayan/Desktop/ITI/build/.rcc/qmlcache/appSmart_Home_Main_qml.cpp",
+  "output": "CMakeFiles/appSmart_Home.dir/.rcc/qmlcache/appSmart_Home_Main_qml.cpp.o"
+},
+{
+  "directory": "/home/mohannad-zayan/Desktop/ITI/build",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/home/mohannad-zayan/Desktop/ITI/build/appSmart_Home_autogen/include -I/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL -g -std=gnu++17 -o CMakeFiles/appSmart_Home.dir/.rcc/qmlcache/appSmart_Home_LoginPage_qml.cpp.o -c /home/mohannad-zayan/Desktop/ITI/build/.rcc/qmlcache/appSmart_Home_LoginPage_qml.cpp",
+  "file": "/home/mohannad-zayan/Desktop/ITI/build/.rcc/qmlcache/appSmart_Home_LoginPage_qml.cpp",
+  "output": "CMakeFiles/appSmart_Home.dir/.rcc/qmlcache/appSmart_Home_LoginPage_qml.cpp.o"
+},
+{
+  "directory": "/home/mohannad-zayan/Desktop/ITI/build",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/home/mohannad-zayan/Desktop/ITI/build/appSmart_Home_autogen/include -I/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL -g -std=gnu++17 -o CMakeFiles/appSmart_Home.dir/.rcc/qmlcache/appSmart_Home_DashboardPage_qml.cpp.o -c /home/mohannad-zayan/Desktop/ITI/build/.rcc/qmlcache/appSmart_Home_DashboardPage_qml.cpp",
+  "file": "/home/mohannad-zayan/Desktop/ITI/build/.rcc/qmlcache/appSmart_Home_DashboardPage_qml.cpp",
+  "output": "CMakeFiles/appSmart_Home.dir/.rcc/qmlcache/appSmart_Home_DashboardPage_qml.cpp.o"
+},
+{
+  "directory": "/home/mohannad-zayan/Desktop/ITI/build",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/home/mohannad-zayan/Desktop/ITI/build/appSmart_Home_autogen/include -I/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL -g -std=gnu++17 -o CMakeFiles/appSmart_Home.dir/.rcc/qmlcache/appSmart_Home_settingsPage_qml.cpp.o -c /home/mohannad-zayan/Desktop/ITI/build/.rcc/qmlcache/appSmart_Home_settingsPage_qml.cpp",
+  "file": "/home/mohannad-zayan/Desktop/ITI/build/.rcc/qmlcache/appSmart_Home_settingsPage_qml.cpp",
+  "output": "CMakeFiles/appSmart_Home.dir/.rcc/qmlcache/appSmart_Home_settingsPage_qml.cpp.o"
+},
+{
+  "directory": "/home/mohannad-zayan/Desktop/ITI/build",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/home/mohannad-zayan/Desktop/ITI/build/appSmart_Home_autogen/include -I/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL -g -std=gnu++17 -o CMakeFiles/appSmart_Home.dir/.rcc/qmlcache/appSmart_Home_DeviceCard_qml.cpp.o -c /home/mohannad-zayan/Desktop/ITI/build/.rcc/qmlcache/appSmart_Home_DeviceCard_qml.cpp",
+  "file": "/home/mohannad-zayan/Desktop/ITI/build/.rcc/qmlcache/appSmart_Home_DeviceCard_qml.cpp",
+  "output": "CMakeFiles/appSmart_Home.dir/.rcc/qmlcache/appSmart_Home_DeviceCard_qml.cpp.o"
+},
+{
+  "directory": "/home/mohannad-zayan/Desktop/ITI/build",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/home/mohannad-zayan/Desktop/ITI/build/appSmart_Home_autogen/include -I/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL -g -std=gnu++17 -o CMakeFiles/appSmart_Home.dir/.qt/rcc/qrc_appSmart_Home_raw_qml_0.cpp.o -c /home/mohannad-zayan/Desktop/ITI/build/.qt/rcc/qrc_appSmart_Home_raw_qml_0.cpp",
+  "file": "/home/mohannad-zayan/Desktop/ITI/build/.qt/rcc/qrc_appSmart_Home_raw_qml_0.cpp",
+  "output": "CMakeFiles/appSmart_Home.dir/.qt/rcc/qrc_appSmart_Home_raw_qml_0.cpp.o"
+},
+{
+  "directory": "/home/mohannad-zayan/Desktop/ITI/build",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/home/mohannad-zayan/Desktop/ITI/build/appSmart_Home_autogen/include -I/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL -g -std=gnu++17 -o CMakeFiles/appSmart_Home.dir/.qt/rcc/qrc_appSmart_Home_raw_res_0.cpp.o -c /home/mohannad-zayan/Desktop/ITI/build/.qt/rcc/qrc_appSmart_Home_raw_res_0.cpp",
+  "file": "/home/mohannad-zayan/Desktop/ITI/build/.qt/rcc/qrc_appSmart_Home_raw_res_0.cpp",
+  "output": "CMakeFiles/appSmart_Home.dir/.qt/rcc/qrc_appSmart_Home_raw_res_0.cpp.o"
+}
+]

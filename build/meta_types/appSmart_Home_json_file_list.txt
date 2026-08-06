@@ -1,0 +1,1 @@
+/home/mohannad-zayan/Desktop/ITI/build/appSmart_Home_autogen/include/main.moc.json

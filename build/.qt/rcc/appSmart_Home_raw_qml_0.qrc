@@ -1,0 +1,10 @@
+<RCC>
+  <qresource prefix="/qt/qml/Smart_Home/">
+    <file alias="Main.qml">/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home/Main.qml</file>
+    <file alias="LoginPage.qml">/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home/LoginPage.qml</file>
+    <file alias="DashboardPage.qml">/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home/DashboardPage.qml</file>
+    <file alias="settingsPage.qml">/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home/settingsPage.qml</file>
+    <file alias="DeviceCard.qml">/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home/DeviceCard.qml</file>
+  </qresource>
+</RCC>
+

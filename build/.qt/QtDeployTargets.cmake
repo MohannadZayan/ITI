@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_appSmart_Home_FILE /home/mohannad-zayan/Desktop/ITI/build/appSmart_Home)
+set(__QT_DEPLOY_TARGET_appSmart_Home_TYPE EXECUTABLE)
