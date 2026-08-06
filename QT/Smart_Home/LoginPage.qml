@@ -52,21 +52,21 @@ Page {
                 spacing: 14
 
                 Label {
-                    text: "Welcome back"
+                    text: qsTr("Welcome back")
                     color: "white"
                     font.pixelSize: 30
                     font.bold: true
                 }
 
                 Label {
-                    text: "Sign in to manage your smart home."
+                    text: qsTr("Sign in to manage your smart home.")
                     color: "#AAB2CC"
                     font.pixelSize: 15
                     Layout.bottomMargin: 12
                 }
 
                 Label {
-                    text: "Username"
+                    text: qsTr("Username")
                     color: "#D7DCF0"
                     font.pixelSize: 14
                     font.bold: true
@@ -74,7 +74,7 @@ Page {
 
                 TextField {
                     id: usernameField
-                    placeholderText: "Enter your username"
+                    placeholderText: qsTr("Enter your username")
                     placeholderTextColor: "#7F89A8"
                     color: "white"
                     font.pixelSize: 16
@@ -92,7 +92,7 @@ Page {
                 }
 
                 Label {
-                    text: "Password"
+                    text: qsTr("Password")
                     color: "#D7DCF0"
                     font.pixelSize: 14
                     font.bold: true
@@ -101,7 +101,7 @@ Page {
 
                 TextField {
                     id: passwordField
-                    placeholderText: "Enter your password"
+                    placeholderText: qsTr("Enter your password")
                     placeholderTextColor: "#7F89A8"
                     echoMode: TextInput.Password
                     color: "white"
@@ -123,7 +123,7 @@ Page {
                         anchors.right: parent.right
                         anchors.rightMargin: 8
                         anchors.verticalCenter: parent.verticalCenter
-                        text: passwordField.echoMode === TextInput.Password ? "Show" : "Hide"
+                        text: passwordField.echoMode === TextInput.Password ? qsTr("Show") : qsTr("Hide")
 
                         onClicked: {
                             passwordField.echoMode = passwordField.echoMode === TextInput.Password
@@ -135,7 +135,7 @@ Page {
 
                 Label {
                     id: errorLabel
-                    text: "Please enter both a username and password."
+                    text: qsTr("Please enter both a username and password.")
                     color: "#FF8B9B"
                     font.pixelSize: 13
                     visible: false
@@ -171,7 +171,7 @@ Page {
                         }
 
                         Label {
-                            text: loginPage.loggingIn ? "Signing in..." : "Sign in"
+                            text: loginPage.loggingIn ? qsTr("Signing in...") : qsTr("Sign in")
                             color: "#10223A"
                             font.pixelSize: 16
                             font.bold: true

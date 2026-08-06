@@ -10,6 +10,7 @@ Rectangle {
     property string imageSource: ""
     property color accentColor: "#47B5FF"
     property var popup
+    property alias isOn: deviceSwitch.checked
 
     implicitWidth: 460
     implicitHeight: 240
@@ -89,7 +90,7 @@ Rectangle {
                     Label {
                         id: statusText
                         anchors.centerIn: parent
-                        text: deviceSwitch.checked ? "ON" : "OFF"
+                        text: deviceSwitch.checked ? qsTr("ON") : qsTr("OFF")
                         color: deviceSwitch.checked ? card.accentColor : "#AAB2CC"
                         font.pixelSize: 11
                         font.bold: true
@@ -97,7 +98,7 @@ Rectangle {
                 }
 
                 Label {
-                    text: deviceSwitch.checked ? "100%" : "0%"
+                    text: deviceSwitch.checked ? qsTr("100%") : qsTr("0%")
                     color: "#D7DCF0"
                     font.pixelSize: 14
                     font.bold: true
@@ -126,8 +127,6 @@ Rectangle {
         Switch {
             id: deviceSwitch
             Layout.alignment: Qt.AlignVCenter
-            // A custom indicator does not always provide a reliable size to
-            // RowLayout. Reserve both visual and clickable space explicitly.
             Layout.preferredWidth: 56
             Layout.preferredHeight: 32
             scale: 1.05
@@ -159,7 +158,7 @@ Rectangle {
             contentItem: Item { }
 
             onToggled: {
-                popup.showMessage(card.deviceName + (checked ? " ON" : " OFF"))
+                popup.showMessage(card.deviceName + (checked ? qsTr(" ON") : qsTr(" OFF")))
             }
         }
     }
