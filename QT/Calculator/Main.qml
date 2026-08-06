@@ -1,90 +1,118 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls.Basic
-
+import Calculator
 
 ApplicationWindow {
     id: window
-    width: 640
+    width: 320
     height: 480
-    minimumWidth: 200
-    minimumHeight: 250
+    minimumWidth: 280
+    minimumHeight: 420
     visible: true
-    title: qsTr("Hello World")
-    property bool lightMode: Application.styleHints.colorScheme === Qt.Light
-    property color reallyDark: "#1f1f1f"
-    property color dark: "#262626"
-    property color reallyLight: "#e7e7e7"
-    property color light: "#e0e0e0"
+    title: qsTr("Calculator")
+    color: "#101010"
 
-    GridLayout {
-        id: grid
-        columns: width < 400 ? 1 : 2
-        rowSpacing: 0
-        columnSpacing: 0
-        anchors.fill: parent
+    // one reusable button style, so we don't repeat the same background/animation code 17 times
+    component CalcButton: Button {
+        id: control
+        property color baseColor: "#2a2a2a"
 
-        Rectangle {
-            id: rectangle1
-            color: window.lightMode ? window.reallyLight : window.reallyDark
-            Layout.fillHeight: true
-            Layout.fillWidth: true
+        hoverEnabled: true
+        Layout.fillWidth: true
+        Layout.fillHeight: true
 
-            ColumnLayout {
-                anchors.fill: parent
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+        // grows slightly on hover, shrinks slightly while pressed, animated smoothly
+        scale: control.pressed ? 0.95 : (control.hovered ? 1.05 : 1.0)
+        Behavior on scale {
+            NumberAnimation { duration: 100; easing.type: Easing.OutQuad }
+        }
 
-                Label {
-                    id: text1
-                    color: window.lightMode ? window.dark : window.light
-                    font.pixelSize: 120
-                    fontSizeMode: Text.Fit
-                    text: qsTr("Hello World")
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    Layout.margins: 16
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                }
+        background: Rectangle {
+            radius: 14
+            color: control.hovered ? Qt.lighter(control.baseColor, 1.3) : control.baseColor
+            Behavior on color {
+                ColorAnimation { duration: 150 }
             }
         }
 
-        Rectangle {
-            id: rectangle2
-            color: window.lightMode ? window.light : window.dark
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-
-            ColumnLayout {
-                anchors.fill: parent
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-
-                Button {
-                    id: button1
-                    text: window.lightMode ? qsTr("\u263D  Dark mode")
-                                           : qsTr("\u263C  Light mode")
-                    Layout.bottomMargin: 16
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-
-                    contentItem: Text {
-                        text: button1.text
-                        color: window.lightMode ? window.light : window.dark
-                        font: button1.font
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                    }
-
-                    background: Rectangle {
-                        implicitWidth: 120
-                        implicitHeight: 36
-                        radius: 8
-                        color: window.lightMode ? window.dark : window.light
-                    }
-
-                    onClicked: window.lightMode = !window.lightMode
-                }
-            }
+        contentItem: Text {
+            text: control.text
+            color: "white"
+            font.pixelSize: 20
+            font.bold: true
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
         }
     }
 
+    Calculator {
+        id: calc
+    }
+
+    ColumnLayout {
+        anchors.fill: parent
+        anchors.margins: 12
+        spacing: 12
+
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 80
+            radius: 14
+            color: "#181818"
+
+            Label {
+                id: display
+                text: calc.display
+                anchors.fill: parent
+                anchors.margins: 12
+                color: "#e0e0e0"
+                horizontalAlignment: Text.AlignRight
+                verticalAlignment: Text.AlignVCenter
+                font.pixelSize: 32
+                font.bold: true
+            }
+        }
+
+        GridLayout {
+            id: buttonGrid
+            columns: 4
+            rowSpacing: 8
+            columnSpacing: 8
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            CalcButton { text: "sin"; onClicked: calc.calculateTrig("sin") }
+            CalcButton { text: "cos"; onClicked: calc.calculateTrig("cos") }
+            CalcButton { text: "tan"; onClicked: calc.calculateTrig("tan") }
+            CalcButton { text: "^";   onClicked: calc.inputOperator("^") }
+
+            CalcButton { text: "C";   onClicked: calc.clear() }
+            CalcButton { text: "7";   onClicked: calc.inputDigit(7) }
+            CalcButton { text: "8";   onClicked: calc.inputDigit(8) }
+            CalcButton { text: "9";   onClicked: calc.inputDigit(9) }
+
+            CalcButton { text: "/";   onClicked: calc.inputOperator("/") }
+            CalcButton { text: "4";   onClicked: calc.inputDigit(4) }
+            CalcButton { text: "5";   onClicked: calc.inputDigit(5) }
+            CalcButton { text: "6";   onClicked: calc.inputDigit(6) }
+
+            CalcButton { text: "*";   onClicked: calc.inputOperator("*") }
+            CalcButton { text: "1";   onClicked: calc.inputDigit(1) }
+            CalcButton { text: "2";   onClicked: calc.inputDigit(2) }
+            CalcButton { text: "3";   onClicked: calc.inputDigit(3) }
+
+            CalcButton { text: "-";   onClicked: calc.inputOperator("-") }
+            CalcButton { text: "0";   onClicked: calc.inputDigit(0) }
+            CalcButton { text: ".";   onClicked: calc.inputDecimal() }
+            CalcButton { text: "+";   onClicked: calc.inputOperator("+") }
+
+            CalcButton {
+                text: "="
+                baseColor: "#3b82f6"
+                Layout.columnSpan: 4
+                onClicked: calc.equals()
+            }
+        }
+    }
 }

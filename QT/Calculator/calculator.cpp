@@ -11,6 +11,7 @@ Calculator::Calculator(QObject *parent) : QObject(parent)
     m_expression = "";
     m_left = 0.0;
     m_pendingOperator = "";
+    m_pendingFunction = "";
     m_waitingForOperand = true;
 }
 
@@ -60,14 +61,43 @@ void Calculator::inputDecimal()
     updateDisplay();
 }
 
+double Calculator::trigValue(const QString &function, double degrees) const
+{
+    double radians = degrees * kPi / 180.0;
+
+    if (function == "sin")
+        return std::sin(radians);
+    if (function == "cos")
+        return std::cos(radians);
+    if (function == "tan")
+        return std::tan(radians);
+    return 0.0;
+}
+
 void Calculator::inputOperator(const QString &op)
 {
-    // lock in the number that was just typed as the left side of the calculation
-    m_left = m_currentNumber.toDouble();
+    QString leftText;
+
+    if (!m_pendingFunction.isEmpty()) {
+        // a trig function was still open (e.g. "tan(45"), close it and compute it now
+        // instead of leaving it dangling for equals() to misinterpret later
+        m_left = trigValue(m_pendingFunction, m_currentNumber.toDouble());
+        leftText = m_pendingFunction + "(" + m_currentNumber + ")"; // "tan(45)"
+        m_pendingFunction = "";
+    } else {
+        // lock in the plain number that was just typed as the left side of the calculation
+        m_left = m_currentNumber.toDouble();
+        leftText = m_currentNumber;
+    }
+
     m_pendingOperator = op;
 
-    // remember what to show on screen, e.g. "5" + "+" becomes "5+"
-    m_expression = m_currentNumber + " " + op;
+    // remember what to show on screen, e.g. "tan(45)" + "+" becomes "tan(45) + "
+    m_expression = leftText + " " + op + " ";
+
+    // the old number has now been locked in above, so clear it so it doesn't
+    // still show up on screen (e.g. "1+" instead of "1+1") until a new digit is typed
+    m_currentNumber = "";
 
     // next digit pressed should start a new number, not continue this one
     m_waitingForOperand = true;
@@ -80,28 +110,35 @@ void Calculator::equals()
     double right = m_currentNumber.toDouble();
 
     try {
-        double result = 0.0;
+        if (!m_pendingFunction.isEmpty()) {
+            // a trig function is waiting, e.g. m_expression is "sin(" and m_currentNumber is "30"
+            double result = trigValue(m_pendingFunction, right);
 
-        if (m_pendingOperator == "+")
-            result = m_left + right;
-        else if (m_pendingOperator == "-")
-            result = m_left - right;
-        else if (m_pendingOperator == "*")
-            result = m_left * right;
-        else if (m_pendingOperator == "/") {
-            if (right == 0.0)
-                throw std::runtime_error("Cannot divide by zero");
-            result = m_left / right;
-        } else if (m_pendingOperator == "^")
-            result = std::pow(m_left, right);
-        else
-            result = right; // no operator was pressed, nothing to calculate
+            // "sin(" + "30" + ")" + " = " + "0.5" -> "sin(30) = 0.5"
+            setDisplay(m_expression + m_currentNumber + ")" + " = " + QString::number(result));
+            m_currentNumber = QString::number(result);
+        } else {
+            double result = 0.0;
 
-        // show the full equation, e.g. "5+3 = 8"
-        setDisplay(m_expression + m_currentNumber + " = " + QString::number(result));
+            if (m_pendingOperator == "+")
+                result = m_left + right;
+            else if (m_pendingOperator == "-")
+                result = m_left - right;
+            else if (m_pendingOperator == "*")
+                result = m_left * right;
+            else if (m_pendingOperator == "/") {
+                if (right == 0.0)
+                    throw std::runtime_error("Cannot divide by zero");
+                result = m_left / right;
+            } else if (m_pendingOperator == "^")
+                result = std::pow(m_left, right);
+            else
+                result = right; // no operator was pressed, nothing to calculate
 
-        // reset so the next digit typed starts a fresh calculation
-        m_currentNumber = QString::number(result);
+            // "5+" + "3" + " = " + "8" -> "5+3 = 8"
+            setDisplay(m_expression + m_currentNumber + " = " + QString::number(result));
+            m_currentNumber = QString::number(result);
+        }
     } catch (const std::exception &error) {
         // show the error message on screen instead of the equation
         setDisplay(QString(error.what()));
@@ -110,28 +147,19 @@ void Calculator::equals()
 
     m_expression = "";
     m_pendingOperator = "";
+    m_pendingFunction = "";
     m_waitingForOperand = true;
 }
 
 void Calculator::calculateTrig(const QString &function)
 {
-    double degrees = m_currentNumber.toDouble();
-    double radians = degrees * kPi / 180.0;
-    double result = 0.0;
-
-    if (function == "sin")
-        result = std::sin(radians);
-    else if (function == "cos")
-        result = std::cos(radians);
-    else if (function == "tan")
-        result = std::tan(radians);
-
-    setDisplay(function + "(" + m_currentNumber + ") = " + QString::number(result));
-
-    m_currentNumber = QString::number(result);
-    m_expression = "";
-    m_pendingOperator = "";
+    // start entering a function call, e.g. pressing "sin" shows "sin(" and waits for the number
+    m_pendingFunction = function;
+    m_expression = function + "(";
+    m_currentNumber = "";
     m_waitingForOperand = true;
+
+    updateDisplay();
 }
 
 void Calculator::clear()
@@ -140,6 +168,7 @@ void Calculator::clear()
     m_expression = "";
     m_left = 0.0;
     m_pendingOperator = "";
+    m_pendingFunction = "";
     m_waitingForOperand = true;
     setDisplay("0");
 }
