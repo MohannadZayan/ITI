@@ -1,3 +1,4 @@
+pragma Translator: translationController.currentLanguage
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -37,7 +38,7 @@ Page {
             Layout.fillWidth: true
 
             Label {
-                text: qsTr("Smart Home Dashboard")
+                text: qsTr("Smart Home Dashboard") + " " + translationController.currentLanguage
                 color: "white"
                 font.pixelSize: 42
                 font.bold: true

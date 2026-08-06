@@ -1,3 +1,4 @@
+pragma Translator: translationController.currentLanguage
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -66,13 +67,27 @@ Page {
                             model: [qsTr("English"), qsTr("Arabic"), qsTr("French")]
                             currentIndex: translationController.currentLanguage === "ar" ? 1 : translationController.currentLanguage === "fr" ? 2 : 0
 
-                            onCurrentIndexChanged: {
-                                var selectedLanguage = currentIndex === 1 ? "ar" : currentIndex === 2 ? "fr" : "en"
-                                if (translationController.currentLanguage !== selectedLanguage) {
-                                    translationController.setLanguage(selectedLanguage)
-                                    settingsPopup.showMessage(qsTr("Language changed to %1").arg(currentText))
-                                }
-                            }
+                            onActivated: {
+
+    var lang = "en"
+
+    switch(currentIndex) {
+    case 1:
+        lang = "ar"
+        break
+    case 2:
+        lang = "fr"
+        break
+    }
+
+    translationController.setLanguage(lang)
+
+    settingsPopup.showMessage(qsTr("Language changed successfully."))
+
+    var stack = StackView.view
+    stack.clear()
+    stack.push("LoginPage.qml")
+}
                         }
                     }
 
