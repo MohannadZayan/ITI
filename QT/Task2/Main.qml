@@ -9,122 +9,35 @@ ApplicationWindow {
     visible: true
     title: qsTr("Car Gallery")
 
-    // Properties
-    property bool showInfo: false
-
-    property string carModel: ""
-    property string engine: ""
-    property string horsepower: ""
-    property string topSpeed: ""
+    CarModel {
+        id: carsModel
+    }
 
     Rectangle {
         anchors.fill: parent
-        color: "#F0F0F0"
+        color: "#1B1D22"
 
-        Row {
-            id: imageRow
+        GridView {
+            id: grid
 
-            spacing: 20
+            anchors.fill: parent
+            anchors.margins: 24
+            clip: true
 
-            anchors {
-                top: parent.top
-                topMargin: 40
-                horizontalCenter: parent.horizontalCenter
-            }
+            cellWidth: 460
+            cellHeight: 460
 
-            //================ BMW M4 =================
-            Image {
-                source: "qrc:/qt/qml/Task2/bmw_m4.jpg"
+            model: carsModel
+            delegate: CarDelegate {}
 
-                width: 220
-                height: 150
-                fillMode: Image.PreserveAspectFit
+            currentIndex: -1
 
-                MouseArea {
-                    anchors.fill: parent
+            ScrollBar.vertical: ScrollBar {}
 
-                    onClicked: {
-                        window.showInfo = true
-                        window.carModel = "BMW M4 Competition"
-                        window.engine = "3.0L Twin Turbo I6"
-                        window.horsepower = "503 HP"
-                        window.topSpeed = "290 km/h"
-                    }
-                }
-            }
-
-            //================ BMW M3 =================
-            Image {
-                source: "qrc:/qt/qml/Task2/bmw_m3.jpeg"
-
-                width: 220
-                height: 150
-                fillMode: Image.PreserveAspectFit
-
-                MouseArea {
-                    anchors.fill: parent
-
-                    onClicked: {
-                        window.showInfo = true
-                        window.carModel = "BMW M3 Competition"
-                        window.engine = "3.0L Twin Turbo I6"
-                        window.horsepower = "473 HP"
-                        window.topSpeed = "250 km/h"
-                    }
-                }
-            }
-
-            //================ SEAT =================
-            Image {
-                source: "qrc:/qt/qml/Task2/SEAT_Leon.jpg"
-
-                width: 220
-                height: 150
-                fillMode: Image.PreserveAspectFit
-
-                MouseArea {
-                    anchors.fill: parent
-
-                    onClicked: {
-                        window.showInfo = true
-                        window.carModel = "SEAT Leon "
-                        window.engine = "1.4L Turbo"
-                        window.horsepower = "150HP"
-                        window.topSpeed = "250 km/h"
-                    }
-                }
-            }
-        }
-
-        Column {
-            visible: window.showInfo
-
-            spacing: 10
-
-            anchors {
-                top: imageRow.bottom
-                topMargin: 40
-                horizontalCenter: parent.horizontalCenter
-            }
-
-            Text {
-                text: "Model: " + window.carModel
-                font.pixelSize: 24
-            }
-
-            Text {
-                text: "Engine: " + window.engine
-                font.pixelSize: 24
-            }
-
-            Text {
-                text: "Horsepower: " + window.horsepower
-                font.pixelSize: 24
-            }
-
-            Text {
-                text: "Top Speed: " + window.topSpeed
-                font.pixelSize: 24
+            // How each card animates in when the gallery first appears.
+            populate: Transition {
+                NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 300 }
+                NumberAnimation { property: "scale"; from: 0.8; to: 1; duration: 300; easing.type: Easing.OutBack }
             }
         }
     }

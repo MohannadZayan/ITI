@@ -17,16 +17,26 @@ qt_add_executable(appTask2
     main.cpp
 )
 
+# Picks up every image dropped into images/ automatically, so new car
+# photos don't require touching this file. Re-run CMake configure
+# (CONFIGURE_DEPENDS) after adding new files if your build doesn't
+# pick them up automatically.
+file(GLOB CAR_IMAGES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" CONFIGURE_DEPENDS
+    "images/*.jpg"
+    "images/*.jpeg"
+    "images/*.png"
+)
+
 qt_add_qml_module(appTask2
     URI Task2
 
     QML_FILES
         Main.qml
+        CarModel.qml
+        CarDelegate.qml
 
     RESOURCES
-        bmw_m4.jpg
-        bmw_m3.jpeg
-        SEAT_Leon.jpg
+        ${CAR_IMAGES}
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
