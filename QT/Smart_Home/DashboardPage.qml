@@ -38,7 +38,7 @@ Page {
             Layout.fillWidth: true
 
             Label {
-                text: qsTr("Smart Home Dashboard") + " " + translationController.currentLanguage
+                text: qsTr("Smart Home Dashboard")
                 color: "white"
                 font.pixelSize: 42
                 font.bold: true

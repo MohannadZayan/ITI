@@ -62,33 +62,56 @@ Page {
                         }
 
                         ComboBox {
-                            id: languageBox
-                            Layout.fillWidth: true
-                            model: [qsTr("English"), qsTr("Arabic"), qsTr("French")]
-                            currentIndex: translationController.currentLanguage === "ar" ? 1 : translationController.currentLanguage === "fr" ? 2 : 0
+    id: languageBox
 
-                            onActivated: {
+    Layout.fillWidth: true
 
-    var lang = "en"
+    model: [
+        qsTr("English"),
+        qsTr("Arabic"),
+        qsTr("French")
+    ]
 
-    switch(currentIndex) {
-    case 1:
-        lang = "ar"
-        break
-    case 2:
-        lang = "fr"
-        break
+    Component.onCompleted: {
+        switch (translationController.currentLanguage) {
+        case "ar":
+            currentIndex = 1
+            break
+        case "fr":
+            currentIndex = 2
+            break
+        default:
+            currentIndex = 0
+            break
+        }
     }
 
-    translationController.setLanguage(lang)
+    onActivated: {
 
-    settingsPopup.showMessage(qsTr("Language changed successfully."))
+        var lang = "en"
 
-    var stack = StackView.view
-    stack.clear()
-    stack.push("LoginPage.qml")
+        switch (index) {
+        case 0:
+            lang = "en"
+            break
+
+        case 1:
+            lang = "ar"
+            break
+
+        case 2:
+            lang = "fr"
+            break
+        }
+
+        if (lang === translationController.currentLanguage)
+            return
+
+        translationController.setLanguage(lang)
+
+        settingsPopup.showMessage(qsTr("Language changed successfully."))
+    }
 }
-                        }
                     }
 
                     RowLayout {
