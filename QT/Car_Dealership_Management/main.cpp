@@ -1,15 +1,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-#include "Database/databasemanager.h"
-
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-
-    // ! Temporary test
-    DatabaseManager db;
-    db.connectDatabase();
 
     QQmlApplicationEngine engine;
 
