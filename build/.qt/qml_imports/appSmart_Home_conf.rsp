@@ -1,0 +1,15 @@
+-rootPath
+/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home
+-cmake-output
+-output-file
+/home/mohannad-zayan/Desktop/ITI/build/.qt/qml_imports/appSmart_Home_conf.cmake
+-importPath
+/home/mohannad-zayan/Desktop/ITI/build
+-importPath
+/home/mohannad-zayan/Desktop/ITI/build/Smart_Home
+-importPath
+/usr/lib/x86_64-linux-gnu/qt6/qml
+-qrcFiles
+/home/mohannad-zayan/Desktop/ITI/build/.qt/rcc/qmake_Smart_Home.qrc
+/home/mohannad-zayan/Desktop/ITI/build/.qt/rcc/appSmart_Home_raw_qml_0.qrc
+/home/mohannad-zayan/Desktop/ITI/build/.qt/rcc/appSmart_Home_raw_res_0.qrc

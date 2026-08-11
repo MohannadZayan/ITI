@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "shieldsplusegy-demo",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8791", "--directory", "/home/mohannad-zayan/Desktop/Demos/shieldsplusegy-demo"],
+      "port": 8791
+    }
+  ]
+}

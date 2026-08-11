@@ -1,0 +1,15 @@
+<RCC>
+  <qresource prefix="/qt/qml/Smart_Home/">
+    <file alias="Images/logo.png">/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home/Images/logo.png</file>
+    <file alias="Images/light.png">/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home/Images/light.png</file>
+    <file alias="Images/light_bed.png">/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home/Images/light_bed.png</file>
+    <file alias="Images/fan_2.jpeg">/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home/Images/fan_2.jpeg</file>
+    <file alias="Images/images.png">/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home/Images/images.png</file>
+    <file alias="Images/garage_2.jpeg">/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home/Images/garage_2.jpeg</file>
+    <file alias="Images/Light-bulb.png">/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home/Images/Light-bulb.png</file>
+    <file alias="translations/smart_home_en.qm">/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home/translations/smart_home_en.qm</file>
+    <file alias="translations/smart_home_ar.qm">/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home/translations/smart_home_ar.qm</file>
+    <file alias="translations/smart_home_fr.qm">/home/mohannad-zayan/Desktop/ITI/QT/Smart_Home/translations/smart_home_fr.qm</file>
+  </qresource>
+</RCC>
+

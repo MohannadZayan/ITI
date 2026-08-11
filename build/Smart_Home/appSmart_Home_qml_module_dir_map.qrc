@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="/qt/qml/Smart_Home">/home/mohannad-zayan/Desktop/ITI/build/Smart_Home</file>
+
+  </qresource>
+</RCC>

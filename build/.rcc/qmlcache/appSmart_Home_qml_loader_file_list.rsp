@@ -1,0 +1,11 @@
+--resource
+/home/mohannad-zayan/Desktop/ITI/build/.qt/rcc/qmake_Smart_Home.qrc
+--resource
+/home/mohannad-zayan/Desktop/ITI/build/.qt/rcc/appSmart_Home_raw_qml_0.qrc
+--resource
+/home/mohannad-zayan/Desktop/ITI/build/.qt/rcc/appSmart_Home_raw_res_0.qrc
+/qt/qml/Smart_Home/Main.qml
+/qt/qml/Smart_Home/LoginPage.qml
+/qt/qml/Smart_Home/DashboardPage.qml
+/qt/qml/Smart_Home/settingsPage.qml
+/qt/qml/Smart_Home/DeviceCard.qml

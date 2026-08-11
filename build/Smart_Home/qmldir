@@ -1,0 +1,9 @@
+module Smart_Home
+typeinfo appSmart_Home.qmltypes
+prefer :/qt/qml/Smart_Home/
+Main 254.0 Main.qml
+LoginPage 254.0 LoginPage.qml
+DashboardPage 254.0 DashboardPage.qml
+DeviceCard 254.0 DeviceCard.qml
+depends QtQuick
+

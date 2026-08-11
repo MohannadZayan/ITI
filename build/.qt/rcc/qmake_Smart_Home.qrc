@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/Smart_Home">
+    <file alias="qmldir">/home/mohannad-zayan/Desktop/ITI/build/Smart_Home/qmldir</file>
+  </qresource>
+</RCC>
+
