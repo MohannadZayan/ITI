@@ -5,6 +5,7 @@ class SystemInfo {
     public: 
     void displaySystemInfo();
     void displayMemoryInfo();
+    void displayDiskInfo();
 
 };
 

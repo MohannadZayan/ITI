@@ -1,5 +1,6 @@
 #include "SystemInfo.h"
 #include <sys/utsname.h>
+#include <sys/statvfs.h>
 #include <fstream>
 #include <string>
 #include <iostream>
@@ -10,6 +11,7 @@
 void SystemInfo :: displaySystemInfo () {
 
     // ! Initially contains sysname, nodename, release, version, machine from sys/utsname.h
+    // ? uname is a linux API that returns info about the system
     struct utsname systemInfo;
 
     if (uname(&systemInfo) == -1) {
@@ -55,3 +57,42 @@ void SystemInfo :: displayMemoryInfo () {
         }
     }
 }
+
+
+// * ========= DISK INFO ==========
+void SystemInfo :: displayDiskInfo () {
+
+    // ? statvfs is another linux API which gives us info about a filesystem
+
+    //! struct statvfs initially contains 4 things:
+    // ! f_blocks : Total blocks
+    // ! f_bfree : Number of free blocks
+    // ! f_bavail : Number of blocks available to an unpriviliged user
+    // ! f_frsize : The size of each filesystem block in bytes
+
+    struct statvfs diskInfo;
+
+    // ? Here we are passing 2 things, the filesystem/path we're interested in ("/") and ("&diskInfo") which is the address of the structure where linux should put the found results
+    if (statvfs ("/", &diskInfo) == -1 ) {
+        perror ("statvfs");
+        return;
+    }
+    // ? Total space
+    unsigned long long totalBytes = diskInfo.f_blocks * diskInfo.f_frsize;
+
+    //? Free space
+    unsigned long long freeBytes = diskInfo.f_bfree * diskInfo.f_frsize;
+
+    // ? Used space
+    unsigned long long usedBytes = totalBytes - freeBytes;
+
+    double totalGB =static_cast<double>(totalBytes) / (1024 * 1024 * 1024);
+
+    double freeGB =static_cast<double>(freeBytes) / (1024 * 1024 * 1024);
+
+    double usedGB =static_cast<double>(usedBytes) / (1024 * 1024 * 1024);
+
+    std :: cout << "Total Disk Space: " << totalGB << " GB" << std :: endl;
+    std :: cout << "Free Used Disk Space: " << freeGB << " GB" << std :: endl;
+    std :: cout << "Used Disk Space: " << usedGB << " GB" << std :: endl;
+}   
