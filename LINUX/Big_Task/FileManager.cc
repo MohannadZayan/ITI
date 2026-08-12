@@ -2,11 +2,12 @@
 #include <sys/stat.h>
 #include <string>
 #include <iostream>
-#include <iomanip>
 
 
 //* ========== FILE INFORMATION ==========
 
+
+// ? This function displays information about a file
 
 void FileManager::fileInfo(const char* path)
 {
@@ -87,7 +88,6 @@ void FileManager::fileInfo(const char* path)
 
 
 // ? This function changes the permissions of a file
-
 
 void FileManager::changePermissions(const char* path, int permissions)
 {
