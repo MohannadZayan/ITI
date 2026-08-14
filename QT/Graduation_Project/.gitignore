@@ -1,0 +1,26 @@
+# VS Code
+.vscode/
+
+# Qt Creator
+*.user
+*.user.*
+.qtc_*/
+
+# CMake
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+Makefile
+
+# Compiled files
+*.o
+*.obj
+*.so
+*.dll
+*.exe
+
+# Local executables
+linux_system_manager
