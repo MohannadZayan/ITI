@@ -4,7 +4,7 @@ project(Graduation_Project VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Quick)
+find_package(Qt6 REQUIRED COMPONENTS Quick Multimedia)
 
 qt_standard_project_setup(REQUIRES 6.10)
 
@@ -45,7 +45,7 @@ set_target_properties(appGraduation_Project PROPERTIES
 )
 
 target_link_libraries(appGraduation_Project
-    PRIVATE Qt6::Quick
+    PRIVATE Qt6::Quick Qt6::Multimedia
 )
 
 install(TARGETS appGraduation_Project
