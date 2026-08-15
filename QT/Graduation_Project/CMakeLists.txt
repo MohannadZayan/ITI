@@ -4,7 +4,7 @@ project(Graduation_Project VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Quick Multimedia Bluetooth DBus)
+find_package(Qt6 REQUIRED COMPONENTS Quick Multimedia)
 
 qt_standard_project_setup(REQUIRES 6.10)
 
@@ -28,7 +28,6 @@ qt_add_qml_module(appGraduation_Project
         SOURCES include/player.h src/player.cpp
         SOURCES include/videoplayer.h src/videoplayer.cpp
         SOURCES include/mediacontroller.h src/mediacontroller.cpp
-        SOURCES include/bluetoothmanager.h src/bluetoothmanager.cpp
         SOURCES include/LocalMedia.h src/LocalMedia.cpp
 )
 
@@ -44,7 +43,7 @@ set_target_properties(appGraduation_Project PROPERTIES
 )
 
 target_link_libraries(appGraduation_Project
-    PRIVATE Qt6::Quick Qt6::Multimedia Qt6::Bluetooth Qt6::DBus
+    PRIVATE Qt6::Quick Qt6::Multimedia
 )
 
 install(TARGETS appGraduation_Project

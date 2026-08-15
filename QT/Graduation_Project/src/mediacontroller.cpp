@@ -6,7 +6,6 @@ MediaController::MediaController(QObject *parent)
     , m_audioPlayer(new Player(this))
     , m_videoPlayer(new VideoPlayer(this))
     , m_localMedia(new LocalMedia(this))
-    , m_bluetoothManager(new BluetoothManager(this))
     , m_currentMediaType(MediaType::Audio)
 {
 
@@ -110,48 +109,6 @@ connect(
         &LocalMedia::errorOccurred,
         this,
         &MediaController::errorOccurred
-    );
-
-
-    // * ================= BLUETOOTH =================
-
-    connect(
-        m_bluetoothManager,
-        &BluetoothManager::deviceDiscovered,
-        this,
-        &MediaController::deviceDiscovered
-    );
-
-    connect(
-        m_bluetoothManager,
-        &BluetoothManager::scanFinished,
-        this,
-        &MediaController::scanFinished
-    );
-
-    connect(
-        m_bluetoothManager,
-        &BluetoothManager::connectionStateChanged,
-        this,
-        &MediaController::connectionStateChanged
-    );
-
-    connect(
-        m_bluetoothManager,
-        &BluetoothManager::errorOccurred,
-        this,
-        &MediaController::errorOccurred
-    );
-
-    connect(
-        m_bluetoothManager,
-        &BluetoothManager::audioDeviceChanged,
-        this,
-        [this](const QAudioDevice &device)
-        {
-            // ? Give the selected Bluetooth audio device to the active player
-            m_audioPlayer->setAudioDevice(device);
-        }
     );
 }
 
@@ -318,38 +275,5 @@ bool MediaController::isMuted() const
         return m_audioPlayer->isMuted();
     else
         return m_videoPlayer->isMuted();
-}
-
-// * ================= BLUETOOTH =================
-
-void MediaController::setBluetoothDiscoverable(bool discoverable)
-{
-    m_bluetoothManager->setDiscoverable(discoverable);
-}
-
-
-void MediaController::startBluetoothScanning()
-{
-    m_bluetoothManager->startScanning();
-}
-
-
-void MediaController::stopBluetoothScanning()
-{
-    m_bluetoothManager->stopScanning();
-}
-
-
-void MediaController::connectToBluetoothDevice(
-    const QBluetoothDeviceInfo &device
-)
-{
-    m_bluetoothManager->connectToDevice(device);
-}
-
-
-void MediaController::disconnectBluetooth()
-{
-    m_bluetoothManager->disconnect();
 }
 

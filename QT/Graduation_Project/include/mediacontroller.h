@@ -7,14 +7,11 @@
 #include <QList>
 #include <QUrl>
 #include <QString>
-#include <QBluetoothDeviceInfo>
-#include <QAudioDevice>
 #include <QQmlEngine>
 
 #include "player.h"
 #include "videoplayer.h"
 #include "LocalMedia.h"
-#include "bluetoothmanager.h"
 
 class MediaController : public QObject
 {
@@ -87,24 +84,6 @@ public:
     bool isMuted() const;
 
 
-    // * ================= BLUETOOTH =================
-
-    // ? Makes this device discoverable so a phone can find and pair with it
-    Q_INVOKABLE void setBluetoothDiscoverable(bool discoverable);
-
-    // ? Starts searching for nearby Bluetooth devices
-    Q_INVOKABLE void startBluetoothScanning();
-
-    // ? Stops searching for Bluetooth devices
-    Q_INVOKABLE void stopBluetoothScanning();
-
-    // ? Connects to the selected Bluetooth device
-    Q_INVOKABLE void connectToBluetoothDevice(const QBluetoothDeviceInfo &device);
-
-    // ? Disconnects from the currently connected Bluetooth device
-    Q_INVOKABLE void disconnectBluetooth();
-
-
 signals:
 
     // * ================= PLAYER SIGNALS =================
@@ -121,20 +100,6 @@ signals:
 
     // ? Tells the frontend that the playlist has changed
     void playlistChanged();
-
-
-    // * ================= BLUETOOTH SIGNALS =================
-
-    // ? A new Bluetooth device was discovered
-    void deviceDiscovered(const QBluetoothDeviceInfo &device);
-
-    // ? Bluetooth scanning has finished
-    void scanFinished();
-
-    // ? Bluetooth connection state changed
-    void connectionStateChanged(
-        BluetoothManager::ConnectionState state
-    );
 
 
     // * ================= GENERAL ERROR =================
@@ -161,9 +126,6 @@ private:
 
     // ? Handles local and USB media files
     LocalMedia *m_localMedia;
-
-    // ? Handles Bluetooth devices and Bluetooth audio outputs
-    BluetoothManager *m_bluetoothManager;
 
     // ? Stores which player the controller is currently controlling
     MediaType m_currentMediaType;
