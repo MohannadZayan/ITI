@@ -9,7 +9,17 @@ class Player : public QObject
 public:
     explicit Player(QObject *parent = nullptr);
 
+    virtual void play() = 0;
+    virtual void pause() = 0;
+    virtual void next() = 0;
+    virtual void previous() = 0;
+
 signals:
+
+void positionChanged();
+void durationChanged();
+void volumeChanged();
+void mutedChanged();
 };
 
 #endif // PLAYER_H
