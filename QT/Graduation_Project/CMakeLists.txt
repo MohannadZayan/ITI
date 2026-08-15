@@ -4,7 +4,7 @@ project(Graduation_Project VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Quick Multimedia)
+find_package(Qt6 REQUIRED COMPONENTS Quick Multimedia Bluetooth DBus)
 
 qt_standard_project_setup(REQUIRES 6.10)
 
@@ -25,12 +25,11 @@ qt_add_qml_module(appGraduation_Project
     URI Graduation_Project
     QML_FILES
         Main.qml
-        SOURCES include/mediamode.h src/mediamode.cpp
         SOURCES include/player.h src/player.cpp
-        SOURCES include/audioplayer.h src/audioplayer.cpp
         SOURCES include/videoplayer.h src/videoplayer.cpp
         SOURCES include/mediacontroller.h src/mediacontroller.cpp
         SOURCES include/bluetoothmanager.h src/bluetoothmanager.cpp
+        SOURCES include/LocalMedia.h src/LocalMedia.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -45,7 +44,7 @@ set_target_properties(appGraduation_Project PROPERTIES
 )
 
 target_link_libraries(appGraduation_Project
-    PRIVATE Qt6::Quick Qt6::Multimedia
+    PRIVATE Qt6::Quick Qt6::Multimedia Qt6::Bluetooth Qt6::DBus
 )
 
 install(TARGETS appGraduation_Project
