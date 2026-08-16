@@ -2,7 +2,50 @@
 
 LocalMedia::LocalMedia(QObject *parent)
     : QObject{parent}
+    , m_usbPollTimer(new QTimer(this))
 {
+    // ? Seed the baseline with whatever is already mounted when the app
+    // ? starts, so only drives plugged in afterwards count as "new"
+    const QList<QStorageInfo> volumes = QStorageInfo::mountedVolumes();
+
+    for (const QStorageInfo &storage : volumes) {
+        if (storage.isValid() && storage.isReady() && !storage.isRoot())
+            m_knownMountPaths.append(storage.rootPath());
+    }
+
+    connect(m_usbPollTimer, &QTimer::timeout, this, &LocalMedia::checkForUsbDevices);
+
+    // ? Poll every 2 seconds - simple and good enough for detecting a USB insert
+    m_usbPollTimer->start(2000);
+}
+
+
+// * ================= CHECK FOR USB DEVICES =================
+// ? Compares the currently mounted volumes against the ones we already knew
+// ? about, and automatically scans any newly-appeared removable drive
+
+void LocalMedia::checkForUsbDevices()
+{
+    const QList<QStorageInfo> volumes = QStorageInfo::mountedVolumes();
+
+    QStringList currentMountPaths;
+
+    for (const QStorageInfo &storage : volumes) {
+
+        // ? Skip the root filesystem and anything not actually mounted/ready
+        if (!storage.isValid() || !storage.isReady() || storage.isRoot())
+            continue;
+
+        currentMountPaths.append(storage.rootPath());
+
+        // ? A volume that wasn't there last time we checked just appeared
+        if (!m_knownMountPaths.contains(storage.rootPath())) {
+            emit usbDeviceConnected(storage.rootPath());
+            setUsbFolder(storage.rootPath());
+        }
+    }
+
+    m_knownMountPaths = currentMountPaths;
 }
 
 

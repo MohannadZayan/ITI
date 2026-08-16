@@ -101,7 +101,16 @@ connect(
         m_localMedia,
         &LocalMedia::playlistChanged,
         this,
-        &MediaController::playlistChanged
+        [this]()
+        {
+            // ? Whatever triggered the rescan - a manual folder pick or an
+            // ? automatically detected USB drive - give the fresh playlists
+            // ? to both players here, in one place
+            m_audioPlayer->setPlaylist(m_localMedia->getAudioPlaylist());
+            m_videoPlayer->setPlaylist(m_localMedia->getVideoPlaylist());
+
+            emit playlistChanged();
+        }
     );
 
     connect(
@@ -217,18 +226,12 @@ void MediaController::setMuted(bool muted)
 void MediaController::setMediaFolder(const QString &folderPath)
 {
     m_localMedia->setFolder(folderPath);
-
-    m_audioPlayer->setPlaylist(m_localMedia->getAudioPlaylist());
-    m_videoPlayer->setPlaylist(m_localMedia->getVideoPlaylist());
 }
 
 
 void MediaController::setUsbFolder(const QString &folderPath)
 {
     m_localMedia->setUsbFolder(folderPath);
-
-    m_audioPlayer->setPlaylist(m_localMedia->getAudioPlaylist());
-    m_videoPlayer->setPlaylist(m_localMedia->getVideoPlaylist());
 }
 
 

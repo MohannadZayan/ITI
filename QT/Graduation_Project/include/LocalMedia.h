@@ -14,6 +14,8 @@
 #include <QList>
 #include <QUrl>          // ? Used to represent media file paths
 #include <QStorageInfo>  // ? Used to get information about the storage device connected to our computer
+#include <QStringList>
+#include <QTimer>        // ? Used to periodically check for newly-inserted USB drives
 
 class LocalMedia : public QObject
 {
@@ -33,10 +35,20 @@ signals:
     void playlistChanged();
     void errorOccurred(const QString &message);
 
+    // ? A new removable drive was detected and is being scanned automatically
+    void usbDeviceConnected(const QString &path);
+
 private:
+    // ? Checks which mounted volumes are new since the last check, and
+    // ? automatically scans any that just appeared
+    void checkForUsbDevices();
+
     QString m_folderPath;
     QList<QUrl> m_audioPlaylist;
     QList<QUrl> m_videoPlaylist;
+
+    QTimer *m_usbPollTimer;           // ? Periodically triggers checkForUsbDevices()
+    QStringList m_knownMountPaths;    // ? Root paths of volumes we've already seen, so only newly-plugged-in drives trigger a scan
 };
 
 #endif // LOCALMEDIA_H
