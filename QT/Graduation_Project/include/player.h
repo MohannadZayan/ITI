@@ -19,10 +19,16 @@ public:
 
     void play();
     void pause();
+    void stop();
     void next();
     void previous();
+
+    // ? Jumps directly to a specific playlist item, e.g. picking a radio station from a list
+    void playAt(int index);
+
     void setMuted(bool muted);
     void setVolume(int volume);
+    void setPosition(qint64 position);
     void setPlaylist(const QList<QUrl>& playlist);
     void setAudioDevice(const QAudioDevice &device);
 
@@ -30,6 +36,11 @@ public:
     qint64 duration() const;
     int volume() const;
     bool isMuted() const;
+    bool isPlaying() const;
+
+    QString title() const;
+    QString artist() const;
+    QString genre() const;
 
 signals:
     void positionChanged();
@@ -37,6 +48,7 @@ signals:
     void volumeChanged();
     void mutedChanged();
     void playbackStateChanged();
+    void metadataChanged();
     void errorOccurred(const QString &message);
 
 protected:

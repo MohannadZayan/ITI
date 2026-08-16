@@ -1,5 +1,7 @@
 #include "player.h"
 
+#include <QMediaMetaData>
+
 Player::Player(QObject *parent)
     : QObject{parent}
     , m_player(new QMediaPlayer(this))
@@ -52,16 +54,35 @@ Player::Player(QObject *parent)
             emit errorOccurred(errorString);
         }
     );
+
+    connect(
+        m_player,
+        &QMediaPlayer::metaDataChanged,
+        this,
+        &Player::metadataChanged
+    );
 }
 
 void Player::play()
 {
+    // ? Nothing has been loaded from the playlist yet - load the first item
+    // ? instead of asking QMediaPlayer to play an empty source
+    if (m_currentIndex == -1 && !m_playlist.isEmpty()) {
+        m_currentIndex = 0;
+        m_player->setSource(m_playlist[m_currentIndex]);
+    }
+
     m_player->play();
 }
 
 void Player::pause()
 {
     m_player->pause();
+}
+
+void Player::stop()
+{
+    m_player->stop();
 }
 
 void Player::next()
@@ -93,6 +114,19 @@ void Player::previous()
     m_player->play();
 }
 
+void Player::playAt(int index)
+{
+    if (index < 0 || index >= m_playlist.size()) {
+        emit errorOccurred("Cannot play item: index out of range.");
+        return;
+    }
+
+    m_currentIndex = index;
+
+    m_player->setSource(m_playlist[m_currentIndex]);
+    m_player->play();
+}
+
 void Player::setMuted(bool muted)
 {
     m_audioOutput->setMuted(muted);
@@ -102,6 +136,11 @@ void Player::setVolume(int volume)
 {
     volume = qBound(0, volume, 100);
     m_audioOutput->setVolume(volume / 100.0f);
+}
+
+void Player::setPosition(qint64 position)
+{
+    m_player->setPosition(position);
 }
 
 void Player::setPlaylist(const QList<QUrl>& playlist)
@@ -133,4 +172,24 @@ int Player::volume() const
 bool Player::isMuted() const
 {
     return m_audioOutput->isMuted();
+}
+
+bool Player::isPlaying() const
+{
+    return m_player->playbackState() == QMediaPlayer::PlayingState;
+}
+
+QString Player::title() const
+{
+    return m_player->metaData().stringValue(QMediaMetaData::Title);
+}
+
+QString Player::artist() const
+{
+    return m_player->metaData().stringValue(QMediaMetaData::ContributingArtist);
+}
+
+QString Player::genre() const
+{
+    return m_player->metaData().stringValue(QMediaMetaData::Genre);
 }

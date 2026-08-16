@@ -23,7 +23,11 @@ class MediaController : public QObject
     Q_PROPERTY(qint64 duration READ duration NOTIFY durationChanged)
     Q_PROPERTY(int volume READ volume NOTIFY volumeChanged)
     Q_PROPERTY(bool muted READ isMuted NOTIFY mutedChanged)
+    Q_PROPERTY(bool playing READ isPlaying NOTIFY playbackStateChanged)
     Q_PROPERTY(MediaType mediaType READ mediaType NOTIFY mediaTypeChanged)
+    Q_PROPERTY(QString trackTitle READ trackTitle NOTIFY metadataChanged)
+    Q_PROPERTY(QString trackArtist READ trackArtist NOTIFY metadataChanged)
+    Q_PROPERTY(QString trackGenre READ trackGenre NOTIFY metadataChanged)
 
 public:
 
@@ -37,7 +41,8 @@ public:
     // ? Determines which media type is currently being controlled
     enum class MediaType {
         Audio,
-        Video
+        Video,
+        Radio
     };
     Q_ENUM(MediaType)
 
@@ -47,13 +52,23 @@ public:
     Q_INVOKABLE void setMediaType(MediaType type);
     MediaType mediaType() const;
 
+    // ? Hands the video player a QML VideoOutput item to render into
+    Q_INVOKABLE void setVideoOutput(QObject *videoOutput);
+
 
     // * ================= PLAYBACK =================
 
     Q_INVOKABLE void play();
     Q_INVOKABLE void pause();
+    Q_INVOKABLE void stop();
     Q_INVOKABLE void next();
     Q_INVOKABLE void previous();
+
+    // ? Jumps directly to a specific playlist item, e.g. picking a radio station from a list
+    Q_INVOKABLE void playAt(int index);
+
+    // ? Seeks the active player to a position, in milliseconds
+    Q_INVOKABLE void seek(qint64 position);
 
 
     // * ================= AUDIO =================
@@ -65,15 +80,21 @@ public:
     // * ================= LOCAL MEDIA =================
 
     // ? Selects a normal local folder and scans it for media
-    Q_INVOKABLE void setMediaFolder(const QString &folderPath);
+    Q_INVOKABLE void setMediaFolder(const QUrl &folderUrl);
 
     // ? Selects a folder located on a USB storage device
-    Q_INVOKABLE void setUsbFolder(const QString &folderPath);
+    Q_INVOKABLE void setUsbFolder(const QUrl &folderUrl);
 
 
     // ? Returns the audio and video playlists generated from the selected folder
     Q_INVOKABLE QList<QUrl> getAudioPlaylist() const;
     Q_INVOKABLE QList<QUrl> getVideoPlaylist() const;
+
+
+    // * ================= RADIO =================
+
+    // ? Sets the list of internet radio station stream URLs - use next()/previous() to switch between them
+    Q_INVOKABLE void setRadioStations(const QList<QUrl> &stations);
 
 
     // * ================= PLAYER PROPERTIES =================
@@ -82,6 +103,11 @@ public:
     qint64 duration() const;
     int volume() const;
     bool isMuted() const;
+    bool isPlaying() const;
+
+    QString trackTitle() const;
+    QString trackArtist() const;
+    QString trackGenre() const;
 
 
 signals:
@@ -93,6 +119,7 @@ signals:
     void volumeChanged();
     void mutedChanged();
     void playbackStateChanged();
+    void metadataChanged();
     void mediaTypeChanged();
 
 
@@ -117,12 +144,18 @@ private:
     MediaController(const MediaController&) = delete;
     MediaController& operator=(const MediaController&) = delete;
 
+    // ? Returns whichever player corresponds to the current MediaType
+    Player* activePlayer() const;
+
 
     // ? Handles audio playback
     Player *m_audioPlayer;
 
     // ? Handles video playback
     VideoPlayer *m_videoPlayer;
+
+    // ? Handles internet radio streaming
+    Player *m_radioPlayer;
 
     // ? Handles local and USB media files
     LocalMedia *m_localMedia;

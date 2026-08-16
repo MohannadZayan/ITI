@@ -5,6 +5,7 @@ MediaController::MediaController(QObject *parent)
     : QObject{parent}
     , m_audioPlayer(new Player(this))
     , m_videoPlayer(new VideoPlayer(this))
+    , m_radioPlayer(new Player(this))
     , m_localMedia(new LocalMedia(this))
     , m_currentMediaType(MediaType::Audio)
 {
@@ -54,6 +55,13 @@ connect(
 );
 
 connect(
+    m_audioPlayer,
+    &Player::metadataChanged,
+    this,
+    &MediaController::metadataChanged
+);
+
+connect(
     m_videoPlayer,
     &VideoPlayer::positionChanged,
     this,
@@ -93,6 +101,62 @@ connect(
     &VideoPlayer::errorOccurred,
     this,
     &MediaController::errorOccurred
+);
+
+connect(
+    m_videoPlayer,
+    &VideoPlayer::metadataChanged,
+    this,
+    &MediaController::metadataChanged
+);
+
+connect(
+    m_radioPlayer,
+    &Player::positionChanged,
+    this,
+    &MediaController::positionChanged
+);
+
+connect(
+    m_radioPlayer,
+    &Player::durationChanged,
+    this,
+    &MediaController::durationChanged
+);
+
+connect(
+    m_radioPlayer,
+    &Player::volumeChanged,
+    this,
+    &MediaController::volumeChanged
+);
+
+connect(
+    m_radioPlayer,
+    &Player::mutedChanged,
+    this,
+    &MediaController::mutedChanged
+);
+
+connect(
+    m_radioPlayer,
+    &Player::playbackStateChanged,
+    this,
+    &MediaController::playbackStateChanged
+);
+
+connect(
+    m_radioPlayer,
+    &Player::errorOccurred,
+    this,
+    &MediaController::errorOccurred
+);
+
+connect(
+    m_radioPlayer,
+    &Player::metadataChanged,
+    this,
+    &MediaController::metadataChanged
 );
 
     // * ================= LOCAL MEDIA =================
@@ -148,6 +212,10 @@ void MediaController::setMediaType(MediaType type)
     if (type == m_currentMediaType)
         return;
 
+    // ? Only one media type may play at a time - stop whatever was active
+    // ? before switching, otherwise it just keeps playing in the background
+    activePlayer()->stop();
+
     m_currentMediaType = type;
 
     emit mediaTypeChanged();
@@ -160,6 +228,7 @@ void MediaController::setMediaType(MediaType type)
     emit volumeChanged();
     emit mutedChanged();
     emit playbackStateChanged();
+    emit metadataChanged();
 }
 
 MediaController::MediaType MediaController::mediaType() const
@@ -167,71 +236,90 @@ MediaController::MediaType MediaController::mediaType() const
     return m_currentMediaType;
 }
 
+void MediaController::setVideoOutput(QObject *videoOutput)
+{
+    m_videoPlayer->setVideoOutput(videoOutput);
+}
+
+Player* MediaController::activePlayer() const
+{
+    switch (m_currentMediaType) {
+    case MediaType::Audio:
+        return m_audioPlayer;
+    case MediaType::Video:
+        return m_videoPlayer;
+    case MediaType::Radio:
+        return m_radioPlayer;
+    }
+
+    return m_audioPlayer;
+}
+
 // * ================= PLAYBACK =================
 
 void MediaController::play()
 {
-    if (m_currentMediaType == MediaType::Audio)
-        m_audioPlayer->play();
-    else
-        m_videoPlayer->play();
+    activePlayer()->play();
 }
 
 
 void MediaController::pause()
 {
-    if (m_currentMediaType == MediaType::Audio)
-        m_audioPlayer->pause();
-    else
-        m_videoPlayer->pause();
+    activePlayer()->pause();
+}
+
+
+void MediaController::stop()
+{
+    activePlayer()->stop();
 }
 
 
 void MediaController::next()
 {
-    if (m_currentMediaType == MediaType::Audio)
-        m_audioPlayer->next();
-    else
-        m_videoPlayer->next();
+    activePlayer()->next();
 }
 
 
 void MediaController::previous()
 {
-    if (m_currentMediaType == MediaType::Audio)
-        m_audioPlayer->previous();
-    else
-        m_videoPlayer->previous();
+    activePlayer()->previous();
+}
+
+
+void MediaController::playAt(int index)
+{
+    activePlayer()->playAt(index);
+}
+
+
+void MediaController::seek(qint64 position)
+{
+    activePlayer()->setPosition(position);
 }
 
 void MediaController::setVolume(int volume)
 {
-    if (m_currentMediaType == MediaType::Audio)
-        m_audioPlayer->setVolume(volume);
-    else
-        m_videoPlayer->setVolume(volume);
+    activePlayer()->setVolume(volume);
 }
 
 
 void MediaController::setMuted(bool muted)
 {
-    if (m_currentMediaType == MediaType::Audio)
-        m_audioPlayer->setMuted(muted);
-    else
-        m_videoPlayer->setMuted(muted);
+    activePlayer()->setMuted(muted);
 }
 
 // * ================= LOCAL MEDIA =================
 
-void MediaController::setMediaFolder(const QString &folderPath)
+void MediaController::setMediaFolder(const QUrl &folderUrl)
 {
-    m_localMedia->setFolder(folderPath);
+    m_localMedia->setFolder(folderUrl.toLocalFile());
 }
 
 
-void MediaController::setUsbFolder(const QString &folderPath)
+void MediaController::setUsbFolder(const QUrl &folderUrl)
 {
-    m_localMedia->setUsbFolder(folderPath);
+    m_localMedia->setUsbFolder(folderUrl.toLocalFile());
 }
 
 
@@ -246,37 +334,52 @@ QList<QUrl> MediaController::getVideoPlaylist() const
     return m_localMedia->getVideoPlaylist();
 }
 
+// * ================= RADIO =================
+
+void MediaController::setRadioStations(const QList<QUrl> &stations)
+{
+    m_radioPlayer->setPlaylist(stations);
+}
+
 // * ================= PLAYER PROPERTIES =================
 
 qint64 MediaController::position() const
 {
-    if (m_currentMediaType == MediaType::Audio)
-        return m_audioPlayer->position();
-    else
-        return m_videoPlayer->position();
+    return activePlayer()->position();
 }
 
 qint64 MediaController::duration() const
 {
-    if (m_currentMediaType == MediaType::Audio)
-        return m_audioPlayer->duration();
-    else
-        return m_videoPlayer->duration();
+    return activePlayer()->duration();
 }
 
 int MediaController::volume() const
 {
-    if (m_currentMediaType == MediaType::Audio)
-        return m_audioPlayer->volume();
-    else
-        return m_videoPlayer->volume();
+    return activePlayer()->volume();
 }
 
 bool MediaController::isMuted() const
 {
-    if (m_currentMediaType == MediaType::Audio)
-        return m_audioPlayer->isMuted();
-    else
-        return m_videoPlayer->isMuted();
+    return activePlayer()->isMuted();
+}
+
+bool MediaController::isPlaying() const
+{
+    return activePlayer()->isPlaying();
+}
+
+QString MediaController::trackTitle() const
+{
+    return activePlayer()->title();
+}
+
+QString MediaController::trackArtist() const
+{
+    return activePlayer()->artist();
+}
+
+QString MediaController::trackGenre() const
+{
+    return activePlayer()->genre();
 }
 

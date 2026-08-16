@@ -25,10 +25,33 @@ qt_add_qml_module(appGraduation_Project
     URI Graduation_Project
     QML_FILES
         Main.qml
+        HomePage.qml
+        AppButton.qml
+        AppSlider.qml
+        AnimatedBackground.qml
+        IconButton.qml
+        MediaBrowserPage.qml
+        LocalPage.qml
+        UsbPage.qml
+        RadioPage.qml
         SOURCES include/player.h src/player.cpp
         SOURCES include/videoplayer.h src/videoplayer.cpp
         SOURCES include/mediacontroller.h src/mediacontroller.cpp
         SOURCES include/LocalMedia.h src/LocalMedia.cpp
+    RESOURCES
+        assets/images/background.jpg
+        assets/images/iti.png
+        assets/images/folder.jpg
+        assets/images/Icon.png
+        assets/images/Play.png
+        assets/images/Pause.png
+        assets/images/Stop.png
+        assets/images/Next.png
+        assets/images/Back.png
+        assets/images/Mute.png
+        assets/images/SmallVolume.png
+        assets/images/MidVolume.png
+        assets/images/FullVolume.png
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
