@@ -1,0 +1,20 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "shieldsplusegy-demo",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8791", "--directory", "/home/mohannad-zayan/Desktop/Demos/shieldsplusegy-demo"],
+      "port": 8791
+    },
+    {
+      "name": "vag-engineering-demo",
+      "runtimeExecutable": "/bin/bash",
+      "runtimeArgs": [
+        "-c",
+        "export PATH=/home/mohannad-zayan/.nvm/versions/node/v24.19.0/bin:$PATH; exec npm --prefix /home/mohannad-zayan/Desktop/Demos/vag-engineering-demo run dev"
+      ],
+      "port": 3000
+    }
+  ]
+}
