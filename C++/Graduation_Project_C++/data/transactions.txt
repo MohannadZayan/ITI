@@ -2,3 +2,11 @@ CREATE | 1 | Mohannad | 1000.000000 | Savings
 CREATE | 2 | Zayan | 100000.000000 | Checking | 100000.000000
 WITHDRAW | 1 | 1000.000000
 CREATE | 3 | Youssef | 10000.000000 | Savings
+CREATE | fsd | Anas | 10000000.000000 | Savings
+DELETE | fsd
+DEPOSIT | 1 | 5000.000000
+CREATE | 5 | Anas | 100000.000000 | Checking | 1000.000000
+CREATE | 500 | Ahmed | 1000.000000 | Savings
+CREATE | 6 | dsasadas | 10000.000000 | Savings
+CREATE | 600 | Mohannad | 109000.000000 | Savings
+CREATE | 100 | Zayan | 321321321.000000 | Checking | 1000.000000

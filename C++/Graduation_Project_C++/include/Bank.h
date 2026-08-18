@@ -28,7 +28,7 @@ class Bank {
 
     //ACCOUNT SEARCHING:
 
-    shared_ptr<Account> findAccount (const string &id) const;
+    shared_ptr<Account> findAccount (const string &id) const; //? No ownership
     bool accountExists (const string &id) const;
 
     //BANK OPERATIONS:

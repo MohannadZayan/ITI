@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Bank Project",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bank",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "Build Bank Project"
+        }
+    ]
+}

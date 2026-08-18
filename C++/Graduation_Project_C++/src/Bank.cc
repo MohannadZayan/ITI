@@ -39,10 +39,12 @@ void Bank :: createAccount (const string &id, const string &owner, double initia
 
     if (type == "Savings") {
         accounts.push_back (make_shared<SavingsAccount> (id, owner, initialBalance));       //this is valid because a savings account IS an account
+        saveAccounts();
 }
 
 else if (type == "Checking") {
     accounts.push_back (make_shared<CheckingAccount> (id, owner, initialBalance, overdraftLimit)); //same here
+    saveAccounts();
 }
 else {
     throw invalid_argument ("Invalid account type.");
@@ -156,7 +158,7 @@ void Bank :: displayAccount (const string &id) const {
 
 //FILE HANDLING:
 void Bank :: saveAccounts() const {
-    ofstream file ("data/accounts.txt");     //opens the file
+    ofstream file ("data/accounts.txt", ios::app);     //opens the file
 
     if (!file) {         //check if the file was opened successfully
         throw runtime_error ("Failed to open accounts.txt for writing.");
