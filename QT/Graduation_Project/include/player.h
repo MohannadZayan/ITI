@@ -42,6 +42,9 @@ public:
     QString artist() const;
     QString genre() const;
 
+    // ? Index of the currently loaded item within the playlist, or -1 if none is loaded
+    int currentIndex() const;
+
 signals:
     void positionChanged();
     void durationChanged();
@@ -50,6 +53,7 @@ signals:
     void playbackStateChanged();
     void metadataChanged();
     void errorOccurred(const QString &message);
+    void currentIndexChanged();
 
 protected:
     QMediaPlayer *m_player;

@@ -7,11 +7,13 @@
 #include <QList>
 #include <QUrl>
 #include <QString>
+#include <QVariantList>
 #include <QQmlEngine>
 
 #include "player.h"
 #include "videoplayer.h"
 #include "LocalMedia.h"
+#include "RadioStations.h"
 
 class MediaController : public QObject
 {
@@ -28,6 +30,8 @@ class MediaController : public QObject
     Q_PROPERTY(QString trackTitle READ trackTitle NOTIFY metadataChanged)
     Q_PROPERTY(QString trackArtist READ trackArtist NOTIFY metadataChanged)
     Q_PROPERTY(QString trackGenre READ trackGenre NOTIFY metadataChanged)
+    Q_PROPERTY(QList<QUrl> playlist READ playlist NOTIFY playlistChanged)
+    Q_PROPERTY(int currentTrackIndex READ currentTrackIndex NOTIFY currentTrackIndexChanged)
 
 public:
 
@@ -96,6 +100,9 @@ public:
     // ? Sets the list of internet radio station stream URLs - use next()/previous() to switch between them
     Q_INVOKABLE void setRadioStations(const QList<QUrl> &stations);
 
+    // ? Returns the stations loaded from the external radio_stations.json config file
+    Q_INVOKABLE QVariantList radioStations() const;
+
 
     // * ================= PLAYER PROPERTIES =================
 
@@ -109,6 +116,10 @@ public:
     QString trackArtist() const;
     QString trackGenre() const;
 
+    // ? The playlist and current index for whichever local media type (audio/video) is active
+    QList<QUrl> playlist() const;
+    int currentTrackIndex() const;
+
 
 signals:
 
@@ -121,12 +132,20 @@ signals:
     void playbackStateChanged();
     void metadataChanged();
     void mediaTypeChanged();
+    void currentTrackIndexChanged();
 
 
     // * ================= LOCAL MEDIA SIGNALS =================
 
     // ? Tells the frontend that the playlist has changed
     void playlistChanged();
+
+
+    // * ================= USB SIGNALS =================
+
+    // ? A removable drive was plugged in / unplugged
+    void usbConnected(const QString &path);
+    void usbDisconnected(const QString &path);
 
 
     // * ================= GENERAL ERROR =================
@@ -159,6 +178,9 @@ private:
 
     // ? Handles local and USB media files
     LocalMedia *m_localMedia;
+
+    // ? Loads the radio station list from the external config file
+    RadioStations *m_radioStations;
 
     // ? Stores which player the controller is currently controlling
     MediaType m_currentMediaType;

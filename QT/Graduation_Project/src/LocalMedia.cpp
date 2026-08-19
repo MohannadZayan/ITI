@@ -45,6 +45,12 @@ void LocalMedia::checkForUsbDevices()
         }
     }
 
+    // ? A volume we knew about last time is no longer mounted - it was unplugged
+    for (const QString &previousPath : std::as_const(m_knownMountPaths)) {
+        if (!currentMountPaths.contains(previousPath))
+            emit usbDeviceDisconnected(previousPath);
+    }
+
     m_knownMountPaths = currentMountPaths;
 }
 

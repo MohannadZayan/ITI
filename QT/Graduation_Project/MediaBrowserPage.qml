@@ -26,6 +26,10 @@ Item {
     property bool showModeToggle: true
     property bool isLive: false
 
+    // ? Lets Main.qml recognize "we're already on the USB page" so it
+    // ? doesn't push a duplicate copy when a USB connect is detected
+    property bool isUsbPage: false
+
     // ? Shown in place of the title when the player reports no metadata -
     // ? RadioPage overrides this with the selected station's name, since a
     // ? live recitation stream has no per-track title to show otherwise
@@ -81,9 +85,90 @@ Item {
             horizontalAlignment: Text.AlignHCenter
         }
 
-        // ? Balances the back button so the title stays visually centered
-        Item {
+        // ? Shows the playlist scanned from the current folder (local or USB) -
+        // ? not relevant to Radio, which already has its own station picker
+        AppButton {
+            text: qsTr("Playlist")
+            visible: !root.isLive
             Layout.preferredWidth: homeButton.Layout.preferredWidth
+            Layout.preferredHeight: root.scaleUnit * 0.055
+            onClicked: playlistDrawer.open()
+        }
+
+        // ? Balances the back button so the title stays visually centered -
+        // ? only needed when the Playlist button above isn't shown (Radio),
+        // ? since an invisible RowLayout item takes up no space
+        Item {
+            visible: root.isLive
+            Layout.preferredWidth: homeButton.Layout.preferredWidth
+        }
+    }
+
+    // ? Slide-in panel listing every file in the currently scanned folder -
+    // ? whichever one is active (local pick or auto-detected USB), since both
+    // ? funnel into the same LocalMedia playlist that this is bound to
+    Drawer {
+        id: playlistDrawer
+        edge: Qt.RightEdge
+        width: Math.min(root.width * 0.4, 360)
+        height: root.height
+
+        background: Rectangle {
+            color: "#0a1a24"
+            border.color: root.accentColor
+            border.width: 2
+        }
+
+        ColumnLayout {
+            anchors.fill: parent
+            anchors.margins: root.scaleUnit * 0.03
+            spacing: root.scaleUnit * 0.015
+
+            Text {
+                text: qsTr("Playlist")
+                font.pixelSize: root.scaleUnit * 0.03
+                font.bold: true
+                color: "white"
+            }
+
+            ListView {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                clip: true
+                spacing: root.scaleUnit * 0.01
+                model: MediaController.playlist
+
+                delegate: Rectangle {
+                    width: ListView.view.width
+                    height: root.scaleUnit * 0.06
+                    radius: 6
+                    color: index === MediaController.currentTrackIndex
+                        ? root.accentColor
+                        : (trackMouseArea.containsMouse ? Qt.rgba(1, 1, 1, 0.12) : Qt.rgba(1, 1, 1, 0.06))
+
+                    Behavior on color { ColorAnimation { duration: 120 } }
+
+                    Text {
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.leftMargin: root.scaleUnit * 0.015
+                        anchors.rightMargin: root.scaleUnit * 0.015
+                        anchors.verticalCenter: parent.verticalCenter
+                        elide: Text.ElideMiddle
+                        text: decodeURIComponent(modelData.toString().split("/").pop())
+                        color: "white"
+                        font.pixelSize: root.scaleUnit * 0.018
+                    }
+
+                    MouseArea {
+                        id: trackMouseArea
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: MediaController.playAt(index)
+                    }
+                }
+            }
         }
     }
 

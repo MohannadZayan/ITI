@@ -38,6 +38,9 @@ signals:
     // ? A new removable drive was detected and is being scanned automatically
     void usbDeviceConnected(const QString &path);
 
+    // ? A previously-mounted removable drive is no longer present
+    void usbDeviceDisconnected(const QString &path);
+
 private:
     // ? Checks which mounted volumes are new since the last check, and
     // ? automatically scans any that just appeared

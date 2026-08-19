@@ -34,10 +34,12 @@ qt_add_qml_module(appGraduation_Project
         LocalPage.qml
         UsbPage.qml
         RadioPage.qml
+        Toast.qml
         SOURCES include/player.h src/player.cpp
         SOURCES include/videoplayer.h src/videoplayer.cpp
         SOURCES include/mediacontroller.h src/mediacontroller.cpp
         SOURCES include/LocalMedia.h src/LocalMedia.cpp
+        SOURCES include/RadioStations.h src/RadioStations.cpp
     RESOURCES
         assets/images/background.jpg
         assets/images/iti.png

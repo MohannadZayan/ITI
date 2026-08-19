@@ -7,6 +7,7 @@ MediaController::MediaController(QObject *parent)
     , m_videoPlayer(new VideoPlayer(this))
     , m_radioPlayer(new Player(this))
     , m_localMedia(new LocalMedia(this))
+    , m_radioStations(new RadioStations(this))
     , m_currentMediaType(MediaType::Audio)
 {
 
@@ -62,6 +63,13 @@ connect(
 );
 
 connect(
+    m_audioPlayer,
+    &Player::currentIndexChanged,
+    this,
+    &MediaController::currentTrackIndexChanged
+);
+
+connect(
     m_videoPlayer,
     &VideoPlayer::positionChanged,
     this,
@@ -108,6 +116,13 @@ connect(
     &VideoPlayer::metadataChanged,
     this,
     &MediaController::metadataChanged
+);
+
+connect(
+    m_videoPlayer,
+    &VideoPlayer::currentIndexChanged,
+    this,
+    &MediaController::currentTrackIndexChanged
 );
 
 connect(
@@ -159,6 +174,13 @@ connect(
     &MediaController::metadataChanged
 );
 
+connect(
+    m_radioPlayer,
+    &Player::currentIndexChanged,
+    this,
+    &MediaController::currentTrackIndexChanged
+);
+
     // * ================= LOCAL MEDIA =================
 
     connect(
@@ -182,6 +204,20 @@ connect(
         &LocalMedia::errorOccurred,
         this,
         &MediaController::errorOccurred
+    );
+
+    connect(
+        m_localMedia,
+        &LocalMedia::usbDeviceConnected,
+        this,
+        &MediaController::usbConnected
+    );
+
+    connect(
+        m_localMedia,
+        &LocalMedia::usbDeviceDisconnected,
+        this,
+        &MediaController::usbDisconnected
     );
 }
 
@@ -229,6 +265,11 @@ void MediaController::setMediaType(MediaType type)
     emit mutedChanged();
     emit playbackStateChanged();
     emit metadataChanged();
+
+    // ? Audio and video have separate playlists/positions - switching between
+    // ? them changes which one is "active", so refresh those too
+    emit playlistChanged();
+    emit currentTrackIndexChanged();
 }
 
 MediaController::MediaType MediaController::mediaType() const
@@ -341,6 +382,11 @@ void MediaController::setRadioStations(const QList<QUrl> &stations)
     m_radioPlayer->setPlaylist(stations);
 }
 
+QVariantList MediaController::radioStations() const
+{
+    return m_radioStations->stations();
+}
+
 // * ================= PLAYER PROPERTIES =================
 
 qint64 MediaController::position() const
@@ -381,5 +427,17 @@ QString MediaController::trackArtist() const
 QString MediaController::trackGenre() const
 {
     return activePlayer()->genre();
+}
+
+QList<QUrl> MediaController::playlist() const
+{
+    return m_currentMediaType == MediaType::Video
+        ? m_localMedia->getVideoPlaylist()
+        : m_localMedia->getAudioPlaylist();
+}
+
+int MediaController::currentTrackIndex() const
+{
+    return activePlayer()->currentIndex();
 }
 

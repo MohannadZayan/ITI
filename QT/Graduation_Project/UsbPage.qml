@@ -6,6 +6,7 @@ import Graduation_Project
 MediaBrowserPage {
     id: usbPage
     pageTitle: qsTr("USB Media")
+    isUsbPage: true
 
     // ? Make sure this page always controls the local audio/video players,
     // ? not whatever player another page (e.g. Radio) left active

@@ -70,6 +70,7 @@ void Player::play()
     if (m_currentIndex == -1 && !m_playlist.isEmpty()) {
         m_currentIndex = 0;
         m_player->setSource(m_playlist[m_currentIndex]);
+        emit currentIndexChanged();
     }
 
     m_player->play();
@@ -93,6 +94,7 @@ void Player::next()
     }
 
     m_currentIndex = (m_currentIndex + 1) % m_playlist.size();
+    emit currentIndexChanged();
 
     m_player->setSource(m_playlist[m_currentIndex]);
     m_player->play();
@@ -110,6 +112,8 @@ void Player::previous()
     else
         --m_currentIndex;
 
+    emit currentIndexChanged();
+
     m_player->setSource(m_playlist[m_currentIndex]);
     m_player->play();
 }
@@ -122,6 +126,7 @@ void Player::playAt(int index)
     }
 
     m_currentIndex = index;
+    emit currentIndexChanged();
 
     m_player->setSource(m_playlist[m_currentIndex]);
     m_player->play();
@@ -147,6 +152,7 @@ void Player::setPlaylist(const QList<QUrl>& playlist)
 {
     m_playlist = playlist;
     m_currentIndex = -1;
+    emit currentIndexChanged();
 }
 
 void Player::setAudioDevice(const QAudioDevice &device)
@@ -192,4 +198,9 @@ QString Player::artist() const
 QString Player::genre() const
 {
     return m_player->metaData().stringValue(QMediaMetaData::Genre);
+}
+
+int Player::currentIndex() const
+{
+    return m_currentIndex;
 }

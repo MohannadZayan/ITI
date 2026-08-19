@@ -14,12 +14,10 @@ MediaBrowserPage {
     showModeToggle: false
     isLive: true
 
-    // ? Built-in Quran radio stations - stream URLs verified to be live before adding
-    readonly property var stations: [
-        { name: qsTr("Quran Radio — Makkah (Saudi Arabia)"), url: "http://stream.radiojar.com/0tpy1h0kxtzuv" },
-        { name: qsTr("Quran Radio — Cairo (Egypt)"), url: "https://stream.radiojar.com/8s5u5tpdtwzuv" },
-        { name: qsTr("Quran Radio — Sharjah (UAE)"), url: "https://l3.itworkscdn.net/smcquranlive/quranradiolive/icecast.audio" }
-    ]
+    // ? Loaded from an external radio_stations.json config file (see
+    // ? RadioStations.cpp) instead of being hardcoded here, so stations can
+    // ? be added/removed without rebuilding the app
+    readonly property var stations: MediaController.radioStations()
 
     // ? These streams don't provide any per-track title metadata (it's
     // ? continuous recitation, not songs) - show the station's own name
